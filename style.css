@@ -1,8 +1,8 @@
 :root {
     --bg-color: #0a0a0a;
     --card-bg: rgba(255, 255, 255, 0.05);
-    --accent-glow: rgba(255, 255, 255, 0.1);
     --text-color: #ffffff;
+    --accent: #ffffff;
 }
 
 body {
@@ -12,36 +12,35 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     display: flex;
     justify-content: center;
+    overflow-x: hidden;
 }
 
-/* Custom Background Image */
 .background-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: url('images/background.jpg') center/cover no-repeat;
-    filter: brightness(0.2) blur(15px);
+    filter: brightness(0.25) blur(10px);
     z-index: -1;
 }
 
 .container {
     width: 90%;
-    max-width: 600px;
+    max-width: 650px;
     padding: 60px 0;
     text-align: center;
 }
 
 .logo {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
     margin-bottom: 15px;
-    border: 2px solid var(--accent-glow);
 }
 
 .about-me {
     font-size: 0.9rem;
     color: #b0b0b0;
-    line-height: 1.6;
     margin-bottom: 40px;
 }
 
@@ -50,47 +49,72 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 50px;
+    gap: 10px;
+    margin-bottom: 40px;
 }
 
 .bubble {
-    padding: 12px 24px;
-    border-radius: 50px; /* Makes it a bubble */
+    padding: 10px 20px;
+    border-radius: 50px;
     background: var(--card-bg);
     color: white;
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     border: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .bubble:hover {
     background: white;
     color: black;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+    transform: translateY(-2px);
 }
 
-/* Feed Styling */
-.feed-section {
-    margin-bottom: 40px;
-}
-
+/* Video Wrapper */
 .video-wrapper {
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 40px;
 }
 
-/* Responsive Grid for Images if you add them later */
-.image-grid {
+/* Album Section */
+.album-controls {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.filter-btn.active {
+    background: white;
+    color: black;
+}
+
+.photo-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
-@media (max-width: 480px) {
-    .bubble { width: 100%; } /* Stacks bubbles on small phones */
+.photo-item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* iPad/Laptop tweak */
+@media (min-width: 768px) {
+    .photo-grid { grid-template-columns: repeat(3, 1fr); }
 }
