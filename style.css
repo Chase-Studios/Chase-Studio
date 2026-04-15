@@ -4,7 +4,20 @@
     --glass-border: rgba(255, 255, 255, 0.1);
     --text-color: #ffffff;
 }
+.social-bubbles {
+    display: flex;
+    flex-wrap: wrap; /* This allows buttons to drop to the next line */
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    padding: 0 10px;
+}
 
+.bubble {
+    flex: 1 1 auto; /* This helps buttons stay a consistent size */
+    min-width: 140px; 
+    text-align: center;
+}
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
