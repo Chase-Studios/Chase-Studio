@@ -1,75 +1,127 @@
-/* Color Variables for Theme Switching */
+/* Custom Dark Theme Variables */
 :root {
-    --bg-image: url('background-light.jpg'); /* Your custom light background */
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --text-color: #1a1a1a;
-    --accent: #3498db;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-image: url('background-dark.jpg'); /* Your custom dark background */
-        --card-bg: rgba(0, 0, 0, 0.7);
-        --text-color: #f4f4f4;
-        --accent: #f39c12;
-    }
+    --bg-dark: #0f0f0f;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --text-main: #ffffff;
+    --text-dim: #b3b3b3;
+    --accent: #ffffff;
+    --bubble-hover: #333333;
 }
 
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Inter', sans-serif;
-    color: var(--text-color);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     display: flex;
     justify-content: center;
-    min-height: 100vh;
-    background: var(--bg-image) no-repeat center center fixed;
+    line-height: 1.6;
+}
+
+/* Background Image with Blur */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('images/background.jpg') no-repeat center center;
     background-size: cover;
+    z-index: -1;
+    filter: brightness(0.3) blur(10px); /* Makes content pop */
 }
 
 .container {
     width: 90%;
-    max-width: 800px;
-    padding: 40px 20px;
+    max-width: 700px;
+    padding: 60px 20px;
     text-align: center;
 }
 
 .logo {
-    max-width: 150px; /* Adjust this to your preferred size */
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Link Cards */
-.link-card {
-    display: block;
-    background: var(--card-bg);
-    margin: 10px 0;
-    padding: 15px;
-    text-decoration: none;
-    color: var(--text-color);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    transition: transform 0.2s;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.link-card:hover {
-    transform: scale(1.02);
-    border-color: var(--accent);
-}
-
-/* Responsive Gallery Grid */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.grid img, .grid video {
-    width: 100%;
-    border-radius: 12px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    margin-bottom: 20px;
     object-fit: cover;
+}
+
+/* About Section */
+.about-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.about-section p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+}
+
+/* Bubble Buttons */
+.socials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.bubble-btn {
+    padding: 12px 25px;
+    border-radius: 50px; /* Makes it a bubble */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.bubble-btn:hover {
+    background: var(--accent);
+    color: black;
+    transform: translateY(-3px);
+}
+
+/* Videos & Photos */
+h3 {
+    margin-top: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+}
+
+.video-container video {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.image-grid img {
+    width: 100%;
+    border-radius: 15px;
+    transition: opacity 0.3s;
+}
+
+/* Tablet & Mobile Adjustments */
+@media (max-width: 600px) {
+    .image-grid {
+        grid-template-columns: 1fr;
+    }
+    .bubble-btn {
+        width: 100%; /* Full width bubbles on phone */
+    }
 }
