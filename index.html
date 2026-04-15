@@ -10,6 +10,7 @@
 <body>
     <div class="background-overlay"></div>
     <div class="container glass-card">
+        
         <header class="triple-header">
             <div class="triple-logo-wrap">
                 <div class="circle-frame frame-side"><img src="images/logo1.png"></div>
@@ -39,15 +40,15 @@
             <h3>Portfolios</h3>
             <div class="photo-grid">
                 <a href="Shoots.html" class="photo-item">
-                    <img src="images/shoot-cover.jpg">
+                    <img src="images/covers/shootscover.png" alt="Personal Shoots">
                     <div class="album-overlay"><span>Personal</span></div>
                 </a>
                 <a href="KHS.html" class="photo-item">
-                    <img src="images/khs-cover.jpg">
+                    <img src="images/covers/khscover.png" alt="KHS Sports">
                     <div class="album-overlay"><span>Sports</span></div>
                 </a>
                 <a href="BTS.html" class="photo-item">
-                    <img src="images/bts-cover.jpg">
+                    <img src="images/covers/btscover.png" alt="Behind the Scenes">
                     <div class="album-overlay"><span>BTS</span></div>
                 </a>
             </div>
@@ -55,4 +56,14 @@
     </div>
 
     <script>
-        const channelID = "UCp0D20R9I3N_p69v5Y
+        const channelID = "UCp0D20R9I3N_p69v5Yn-v7w"; 
+        fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`)
+        .then(res => res.json()).then(data => {
+            if(data.items && data.items.length > 0) {
+                const videoId = data.items[0].link.split('v=')[1];
+                document.getElementById('yt-latest').src = `https://www.youtube.com/embed/${videoId}`;
+            }
+        });
+    </script>
+</body>
+</html>
