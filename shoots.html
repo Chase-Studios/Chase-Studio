@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoots | Chase Studios crossover</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <div class="container glass-card">
+        <header class="triple-header">
+            <div class="triple-logo-wrap">
+                <div class="circle-frame frame-side">
+                    <img src="images/logo1.png" alt="Logo 1">
+                </div>
+                <div class="circle-frame frame-center">
+                    <img src="images/logo-main.png" alt="Logo Center">
+                </div>
+                <div class="circle-frame frame-side">
+                    <img src="images/logo2.png" alt="Logo 2">
+                </div>
+            </div>
+            <h1>Shoots Album</h1>
+            <p class="about-me">A collection of professional captures by Chase x Chyston.</p>
+        </header>
+
+        <section class="section">
+            <div class="photo-grid">
+                <div class="photo-item"><img src="images/shoot1.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="images/shoot2.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="images/shoot3.jpg" onclick="openLightbox(this.src)"></div>
+                <div class="photo-item"><img src="images/shoot4.jpg" onclick="openLightbox(this.src)"></div>
+            </div>
+        </section>
+
+        <footer class="album-footer">
+            <a href="index.html" class="bubble back-btn">Return to Main Website</a>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById("lightbox").style.display = "flex";
+            document.getElementById("lightbox-img").src = src;
+        }
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+        }
+    </script>
+</body>
+</html>
