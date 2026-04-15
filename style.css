@@ -1,108 +1,81 @@
+/* CHASE STUDIOS x CHYSTON MASTER CSS 
+    Final Version - Optimized for all pages
+*/
+
 :root {
     --bg-dark: #050505;
     --glass: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.15);
     --text: #ffffff;
+    --text-dim: #b0b0b0;
+    --accent-glow: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text);
-    display: flex; justify-content: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
 }
 
+/* 1. BACKGROUND LAYER */
 .background-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: url('images/background.jpg') center/cover no-repeat;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('images/background.jpg') center center / cover no-repeat;
     z-index: -1;
 }
 
-/* Glassmorphism UI */
-.glass-card {
+/* 2. GLASSMORPHISM CONTAINER */
+.container {
     background: var(--glass);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border: 1px solid var(--glass-border);
     border-radius: 40px;
-    padding: 60px 20px;
-    margin: 40px 10px;
-    width: 100%; max-width: 650px;
+    padding: 60px 25px;
+    margin: 40px 15px;
+    width: 100%;
+    max-width: 650px;
     text-align: center;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
 }
 
-/* Triple Overlapping Circles */
+/* 3. TRIPLE CROSSOVER LOGO HEADER */
 .triple-logo-wrap {
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
 }
 
 .circle-frame {
-    border-radius: 50%; overflow: hidden;
-    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--glass-border);
     background: #111;
-    display: flex; align-items: center; justify-content: center;
-    transition: 0.4s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.circle-frame img { width: 100%; height: 100%; object-fit: cover; }
+.circle-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .frame-side {
-    width: 85px; height: 85px;
-    margin: 0 -20px; /* This creates the overlap */
-    z-index: 1;
-    opacity: 0.7;
-}
-
-.frame-center {
-    width: 120px; height: 120px;
-    z-index: 10;
-    border-color: #fff;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}
-
-.triple-logo-wrap:hover .frame-center { transform: scale(1.05); }
-
-/* Buttons & Sections */
-.social-bubbles {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 12px; margin-bottom: 50px;
-}
-
-.bubble {
-    padding: 12px 24px; border-radius: 50px;
-    background: rgba(255, 255, 255, 0.08);
-    color: white; text-decoration: none; font-weight: 700;
-    border: 1px solid var(--glass-border);
-    transition: 0.3s; font-size: 0.85rem;
-}
-
-.bubble:hover { background: #fff; color: #000; transform: translateY(-3px); }
-
-.section h3 { text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; opacity: 0.6; }
-
-.video-wrapper {
-    position: relative; padding-bottom: 56.25%; height: 0;
-    overflow: hidden; border-radius: 20px; background: #000;
-    margin-bottom: 40px;
-}
-
-.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
-.photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-
-.photo-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 15px; cursor: pointer; transition: 0.3s; }
-
-.photo-item img:hover { transform: scale(1.05); }
-
-/* Lightbox */
-.lightbox {
-    display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); justify-content: center; align-items: center; backdrop-filter: blur(5px);
-}
-
-.lightbox-content { max-width: 90%; max-height: 80%; border-radius: 10px; }
-
-.close { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; cursor: pointer; }
+    width: 80px;
+    height: 80px;
