@@ -19,10 +19,10 @@
 
         <section class="social-bubbles">
             <a href="https://tiktok.com/@notchas3.lol" class="bubble tiktok">Not Chase TikTok</a>
-            <a href="https://tiktok.com/@chasestudiotv" class="bubble tiktok">Not Chase Studio TikTok</a>
-            <a href="https://instagram.com/chas3.lol" class="bubble insta">Chase Studios Instagram</a>
-            <a href="https://instagram.com/chyston.studio.pics" class="bubble insta">chyston Studios Instagram</a>
-            <a href="https://youtube.com/@NOTCHAS3" class="bubble yt">NOTCHAS3 YouTube</a>
+            <a href="https://tiktok.com/@chasestudiotv" class="bubble tiktok">Chase Studio TikTok</a>
+            <a href="https://instagram.com/chas3.lol" class="bubble insta">Chase Instagram</a>
+            <a href="https://instagram.com/chyston.studio.pics" class="bubble insta">Chyston Instagram</a>
+            <a href="https://youtube.com/@NOTCHAS3" class="bubble yt">YouTube</a>
         </section>
 
         <section class="feed-section">
@@ -32,25 +32,53 @@
             </div>
         </section>
 
-        <section class="feed-section">
-            <h3>Latest from TikTok & IG</h3>
-            <p style="font-size: 0.8rem; color: #888;">To auto-sync TikTok/IG, I recommend using a free tool like <b>Behold.so</b> or <b>LightWidget</b> and pasting their code below:</p>
-            <div id="social-widget">
-                </div>
+        <section class="album-section">
+            <h3>Portfolios</h3>
+            <div class="album-controls">
+                <button class="filter-btn active" onclick="filterAlbum('all')">All</button>
+                <button class="filter-btn" onclick="filterAlbum('shoots')">Shoots</button>
+                <button class="filter-btn" onclick="filterAlbum('lifestyle')">Lifestyle</button>
+                <button class="filter-btn" onclick="filterAlbum('bts')">BTS</button>
+            </div>
+
+            <div class="photo-grid">
+                <div class="photo-item shoots"><img src="images/shoot1.jpg" alt="Shoot"></div>
+                <div class="photo-item lifestyle"><img src="images/life1.jpg" alt="Lifestyle"></div>
+                <div class="photo-item bts"><img src="images/bts1.jpg" alt="BTS"></div>
+                <div class="photo-item shoots"><img src="images/shoot2.jpg" alt="Shoot"></div>
+            </div>
         </section>
     </div>
 
     <script>
-        const channelID = "UCxxxxxxxxxxxxxxx"; // REPLACE WITH YOUR CHANNEL ID
+        // Replace this with your actual YouTube Channel ID (Found in YT Advanced Settings)
+        const channelID = "UCp0D20R9I3N_p69v5Yn-v7w"; 
         const ytIframe = document.getElementById('yt-latest');
         
-        // This uses a free RSS-to-JSON converter to find your newest video
         fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`)
         .then(response => response.json())
         .then(data => {
-            const videoId = data.items[0].link.split('v=')[1];
-            ytIframe.src = `https://www.youtube.com/embed/${videoId}`;
+            if(data.items && data.items.length > 0) {
+                const videoId = data.items[0].link.split('v=')[1];
+                ytIframe.src = `https://www.youtube.com/embed/${videoId}`;
+            }
         });
+
+        // Photo Filter Logic
+        function filterAlbum(category) {
+            const items = document.querySelectorAll('.photo-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
