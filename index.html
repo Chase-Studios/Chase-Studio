@@ -5,33 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chase Studios</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="background-overlay"></div>
+    
     <div class="container">
         <header>
-            <img scr="logo.png" alt="Chase Studio Logo" class="logo" >
-            <p>Photographer & Videographer</p>
+            <img src="logo.png" alt="Chase Studios Logo" class="logo">
+            <h1>Chase Studios</h1>
         </header>
 
-        <main>
-            <section class="links">
-                <a href="#" class="btn">Instagram</a>
-                <a href="#" class="btn">YouTube</a>
-                <a href="#" class="btn">TikTok</a>
-            </section>
+        <section class="socials">
+            <a href="#" class="link-card">Instagram</a>
+            <a href="#" class="link-card">YouTube</a>
+            <a href="#" class="link-card">TikTok</a>
+        </section>
 
-            <section class="gallery">
-                <div class="media-card">
-                    <img src="https://via.placeholder.com/400x250" alt="Work 1">
-                </div>
-                <div class="media-card">
-                    <video controls width="100%">
-                        <source src="your-video.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </section>
-        </main>
+        <section class="gallery">
+            <h3>Featured Work</h3>
+            <div class="grid">
+                <div class="item"><img src="photo1.jpg" alt="Work 1"></div>
+                <div class="item"><video src="video1.mp4" controls></video></div>
+            </div>
+        </section>
     </div>
 </body>
 </html>
