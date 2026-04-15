@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chase Studios</title>
+    <title>Chase Studios | Official</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -14,25 +14,37 @@
         <header>
             <img src="images/logo.png" alt="Chase Studios" class="logo">
             <h1>Chase Studios</h1>
-            <p class="about-me">Digital Creator & Producer. Capturing the world through a lens of modern aesthetics.</p>
+            <p class="about-me">Digital Creator & Producer. Capturing modern aesthetics through high-end production.</p>
         </header>
 
-        <section class="social-bubbles">
+        <nav class="social-bubbles">
             <a href="https://tiktok.com/@notchas3.lol" class="bubble">Not Chase TikTok</a>
             <a href="https://tiktok.com/@chasestudiotv" class="bubble">Chase Studio TikTok</a>
             <a href="https://instagram.com/chas3.lol" class="bubble">Chase Instagram</a>
             <a href="https://instagram.com/chyston.studio.pics" class="bubble">Chyston Instagram</a>
             <a href="https://youtube.com/@NOTCHAS3" class="bubble">YouTube</a>
+        </nav>
+
+        <section class="section">
+            <h3>Latest Production</h3>
+            <div class="video-wrapper">
+                <iframe id="yt-latest" width="100%" height="315" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
         </section>
 
-        <section class="album-section">
-            <h3>Portfolios</h3>
+        <section class="section">
+            <h3>Portfolio</h3>
             <div class="photo-grid">
                 <div class="photo-item"><img src="images/shoot1.jpg" onclick="openLightbox(this.src)"></div>
                 <div class="photo-item"><img src="images/life1.jpg" onclick="openLightbox(this.src)"></div>
                 <div class="photo-item"><img src="images/bts1.jpg" onclick="openLightbox(this.src)"></div>
                 <div class="photo-item"><img src="images/shoot2.jpg" onclick="openLightbox(this.src)"></div>
             </div>
+        </section>
+
+        <section class="section">
+            <div id="social-widget">
+                </div>
         </section>
     </div>
 
@@ -42,6 +54,21 @@
     </div>
 
     <script>
+        /** 1. AUTO-SYNC YOUTUBE **/
+        // Use your YouTube Channel ID here
+        const channelID = "UCp0D20R9I3N_p69v5Yn-v7w"; 
+        const ytIframe = document.getElementById('yt-latest');
+        
+        fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.items && data.items.length > 0) {
+                const videoId = data.items[0].link.split('v=')[1];
+                ytIframe.src = `https://www.youtube.com/embed/${videoId}`;
+            }
+        }).catch(err => console.log("YT feed error:", err));
+
+        /** 2. LIGHTBOX LOGIC **/
         function openLightbox(src) {
             document.getElementById("lightbox").style.display = "flex";
             document.getElementById("lightbox-img").src = src;
