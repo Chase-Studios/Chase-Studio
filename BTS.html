@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_654321"></script>
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -16,15 +15,14 @@
     </div>
     <div id="lightbox" class="lightbox" onclick="this.style.display='none'"><img class="lightbox-content" id="lb-img"></div>
     <script>
-        const folderPath = "images/bts/"; // Change to images/bts/ for BTS.html
+        const folderPath = "images/bts/"; // Remember: Use "images/bts/" for the BTS page
         const gallery = document.getElementById('gallery');
-        for (let i = 1; i <= 20; i++) {
-            const wrap = document.createElement('div');
-            wrap.className = 'photo-item-wrap';
+        for (let i = 1; i <= 25; i++) {
+            const item = document.createElement('div');
+            item.className = 'photo-item';
             const path = `${folderPath}${i}.JPG`;
-            wrap.innerHTML = `<div class="photo-item"><img src="${path}" onclick="openLB('${path}')" onerror="this.parentElement.parentElement.style.display='none'"></div>
-            <div class="rating-area" data-lyket-type="like" data-lyket-id="gallery-${i}" data-lyket-template="twitter"></div>`;
-            gallery.appendChild(wrap);
+            item.innerHTML = `<img src="${path}" onclick="openLB('${path}')" onerror="this.parentElement.style.display='none'">`;
+            gallery.appendChild(item);
         }
         function openLB(s) { document.getElementById('lb-img').src = s; document.getElementById('lightbox').style.display='flex'; }
     </script>
