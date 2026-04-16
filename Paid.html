@@ -15,32 +15,35 @@
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1 style="color: #ffd700;">Premium Gallery</h1>
-            <p style="opacity: 0.8;">Exclusive Shoots & Private Commissions</p>
+            <h1 style="color: #ffd700;">Paid Portfolio</h1>
+            <p style="opacity: 0.8;">Premium Quality • Private Sessions</p>
         </header>
 
-        <div class="photo-grid" id="paid-teaser"></div>
+        <div class="photo-grid" id="paid-gallery"></div>
 
-        <div style="margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,215,0,0.3);">
-            <h2 style="font-size: 1.2rem;">Want a Private Session?</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 20px;">High-quality production for sports, portraits, and events.</p>
-            <a href="https://instagram.com/chas3.lol" class="bubble" style="background: #ffd700; color: black; font-weight: bold; width: 80%; display: inline-block;">DM TO BOOK</a>
+        <div style="margin-top: 50px; padding: 30px 20px; background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 30px;">
+            <h2 style="color: #ffd700; margin-bottom: 10px;">Ready for your own shoot?</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 25px; opacity: 0.9;">Professional sports, portraits, and creative production.</p>
+            <a href="https://instagram.com/chas3.lol" class="bubble" style="background: #ffd700; color: #000; font-weight: bold; width: 80%; display: inline-block;">DM TO BOOK</a>
         </div>
 
         <a href="index.html" class="bubble back-btn">Return Home</a>
     </div>
 
+    <div id="lightbox" class="lightbox" onclick="this.style.display='none'"><img class="lightbox-content" id="lb-img"></div>
+
     <script>
-        // Just show a few selected photos from a 'paid' folder
         const folder = "images/paid/";
-        const count = 4; // Keep it small to keep them wanting more
-        const g = document.getElementById('paid-teaser');
+        const count = 6; // Show your top 6 favorite shots
+        const g = document.getElementById('paid-gallery');
 
         for (let i = 1; i <= count; i++) {
             const item = document.createElement('div');
             item.className = 'photo-item';
             const img = document.createElement('img');
+            
             img.src = `${folder}${i}.JPG`;
+            img.onclick = () => { document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=img.src; };
             img.onerror = function() {
                 if (this.src.includes('.JPG')) { this.src = `${folder}${i}.jpg`; }
                 else { this.parentElement.style.display = 'none'; }
