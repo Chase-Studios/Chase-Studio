@@ -3,52 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | Chase Studios</title>
+    <title>Behind The Scenes | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
-    <div class="container glass-card">
+    <div class="container">
         <header class="triple-header">
             <div class="triple-logo-wrap">
                 <div class="circle-frame frame-side"><img src="images/logo1.png"></div>
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1 id="gallery-title">Gallery</h1>
+            <h1>Behind The Scenes</h1>
         </header>
 
-        <div class="photo-grid" id="auto-gallery"></div>
+        <div class="photo-grid" id="bts-gallery"></div>
 
-        <footer class="album-footer">
-            <a href="index.html" class="bubble back-btn">Return Home</a>
-        </footer>
+        <a href="index.html" class="bubble back-btn">Return Home</a>
     </div>
 
-    <div id="lightbox" class="lightbox" onclick="this.style.display='none'">
-        <span class="close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
-    </div>
+    <div id="lightbox" class="lightbox" onclick="this.style.display='none'"><img class="lightbox-content" id="lb-img"></div>
 
     <script>
-        /** CONFIG SECTION: Change these for each page! **/
-        const folderPath = "images/bts/"; // OR "images/khs/" OR "images/bts/"
-        const imageCount = 10;               // How many photos are in the folder?
-        const galleryTitle = "Behind the Scenes"; // Title shown at the top
+        const folder = "images/bts/";
+        const count = 50;
+        const g = document.getElementById('bts-gallery');
 
-        // Do not touch below this line
-        document.getElementById('gallery-title').innerText = galleryTitle;
-        const galleryGrid = document.getElementById('auto-gallery');
-        for (let i = 1; i <= imageCount; i++) {
+        for (let i = 1; i <= count; i++) {
             const item = document.createElement('div');
             item.className = 'photo-item';
-            const imgPath = `${folderPath}${i}.jpg`;
-            item.innerHTML = `<img src="${imgPath}" onclick="openLightbox('${imgPath}')">`;
-            galleryGrid.appendChild(item);
-        }
-        function openLightbox(src) {
-            document.getElementById("lightbox").style.display = "flex";
-            document.getElementById("lightbox-img").src = src;
+            const img = document.createElement('img');
+            
+            img.src = `${folder}${i}.JPG`;
+            img.onclick = () => { document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=img.src; };
+            img.onerror = function() {
+                if (this.src.includes('.JPG')) {
+                    this.src = `${folder}${i}.jpg`;
+                } else {
+                    this.parentElement.style.display = 'none';
+                }
+            };
+            item.appendChild(img);
+            g.appendChild(item);
         }
     </script>
 </body>
