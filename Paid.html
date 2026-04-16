@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paid Shoots | Chase Studios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <header class="triple-header">
+            <div class="triple-logo-wrap">
+                <div class="circle-frame frame-side"><img src="images/logo1.png"></div>
+                <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
+                <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
+            </div>
+            <h1 style="color: #ffd700;">Premium Gallery</h1>
+            <p style="opacity: 0.8;">Exclusive Shoots & Private Commissions</p>
+        </header>
+
+        <div class="photo-grid" id="paid-teaser"></div>
+
+        <div style="margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,215,0,0.3);">
+            <h2 style="font-size: 1.2rem;">Want a Private Session?</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">High-quality production for sports, portraits, and events.</p>
+            <a href="https://instagram.com/chas3.lol" class="bubble" style="background: #ffd700; color: black; font-weight: bold; width: 80%; display: inline-block;">DM TO BOOK</a>
+        </div>
+
+        <a href="index.html" class="bubble back-btn">Return Home</a>
+    </div>
+
+    <script>
+        // Just show a few selected photos from a 'paid' folder
+        const folder = "images/paid/";
+        const count = 4; // Keep it small to keep them wanting more
+        const g = document.getElementById('paid-teaser');
+
+        for (let i = 1; i <= count; i++) {
+            const item = document.createElement('div');
+            item.className = 'photo-item';
+            const img = document.createElement('img');
+            img.src = `${folder}${i}.JPG`;
+            img.onerror = function() {
+                if (this.src.includes('.JPG')) { this.src = `${folder}${i}.jpg`; }
+                else { this.parentElement.style.display = 'none'; }
+            };
+            item.appendChild(img);
+            g.appendChild(item);
+        }
+    </script>
+</body>
+</html>
