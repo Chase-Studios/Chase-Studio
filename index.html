@@ -1,144 +1,62 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Chase Studios | Master</title>
-
     <link rel="stylesheet" href="style.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
-
     <div class="background-overlay"></div>
-
-    <div class="container glass-card">
-
+    <div class="container">
         <header class="triple-header">
-
             <div class="triple-logo-wrap">
-
                 <div class="circle-frame frame-side"><img src="images/logo1.png"></div>
-
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
-
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
-
             </div>
-
             <h1>Chase Studios</h1>
-
             <p class="about-me">The Ultimate Production Crossover | Digital Creator & Producer</p>
-
         </header>
 
-
-
         <nav class="social-bubbles">
-
-            <a href="https://tiktok.com/@notchas3.lol" class="bubble">Not Chase TikTok</a>
-
-            <a href="https://tiktok.com/@chasestudiotv" class="bubble">Chase Studio TikTok</a>
-
-            <a href="https://instagram.com/chas3.lol" class="bubble">Chase Instagram</a>
-
-            <a href="https://instagram.com/chyston.studio.pics" class="bubble">Chyston Instagram</a>
-
-            <a href="https://youtube.com/@NOTCHAS3" class="bubble">YouTube</a>
-
+            <a href="https://tiktok.com/@notchas3.lol" class="bubble">Chase Studio's TikTok 1</a>
+            <a href="https://tiktok.com/@chasestudiotv" class="bubble">Chase Studio's TikTok 2</a>
+            <a href="https://instagram.com/chas3.lol" class="bubble">Chase Studio's</a>
+            <a href="https://instagram.com/chyston.studio.pics" class="bubble">Chyston Studio's</a>
+            <a href="https://youtube.com/@NOTCHAS3" class="bubble">Chase's YouTube Channel</a>
         </nav>
 
+        <div class="video-wrapper">
+            <iframe id="yt-latest" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
 
-
-        <section class="section">
-
-            <h3>Latest Production</h3>
-
-            <div class="video-wrapper">
-
-                <iframe id="yt-latest" width="100%" height="315" src="" frameborder="0" allowfullscreen></iframe>
-
-            </div>
-
-        </section>
-
-
-        <section class="section">
-
-            <h3>Gallery</h3>
-
-            
-
-            <div class="photo-grid">
-
-                <a href="Shoots.html" class="photo-item">
-
-                    <img src="images/covers/shootscover.png">
-
-                    <div class="album-overlay"><span>Personal</span></div>
-
-                </a>
-
-                <a href="KHS.html" class="photo-item">
-
-                    <img src="images/covers/khscover.png">
-
-                    <div class="album-overlay"><span>KHS</span></div>
-
-                </a>
-
-                <a href="BTS.html" class="photo-item">
-
-                    <img src="images/covers/btscover.png">
-
-                    <div class="album-overlay"><span>BTS</span></div>
-
-                </a>
-
-                    <a href="Paid.html" class="photo-item">
-
-                    <img src="images/covers/paidcover.png">
-
-                    <div class="album-overlay"><span>Paid</span></div>
-
-                </a>
-
-            </div>
-
-        </section>
-
+        <div class="photo-grid">
+            <a href="Shoots.html" class="photo-item">
+                <img src="images/covers/shootscover.png">
+                <div class="album-overlay"><span>Personal</span></div>
+            </a>
+            <a href="KHS.html" class="photo-item">
+                <img src="images/covers/khscover.png">
+                <div class="album-overlay"><span>KHS Sports</span></div>
+            </a>
+            <a href="BTS.html" class="photo-item">
+                <img src="images/covers/btscover.png">
+                <div class="album-overlay"><span>BTS</span></div>
+            </a>
+            <a href="paid.html" class="photo-item">
+                <img src="images/covers/paidcover.png">
+                <div class="album-overlay"><span>Paid Work</span></div>
+            </a>
+        </div>
     </div>
-
-
-
     <script>
-
         const channelID = "UCp0D20R9I3N_p69v5Yn-v7w"; 
-
         fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`)
-
         .then(res => res.json()).then(data => {
-
-            if(data.items && data.items.length > 0) {
-
-                const videoId = data.items[0].link.split('v=')[1];
-
-                document.getElementById('yt-latest').src = `https://www.youtube.com/embed/${videoId}`;
-
-            }
-
+            const videoId = data.items[0].link.split('v=')[1];
+            document.getElementById('yt-latest').src = `https://www.youtube.com/embed/${videoId}`;
         });
-
     </script>
-
 </body>
-
 </html>
