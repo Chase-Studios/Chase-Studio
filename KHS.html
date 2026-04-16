@@ -34,7 +34,7 @@
             for (let i = 1; i <= 50; i++) { // Set to 50, will auto-hide extras
                 const item = document.createElement('div');
                 item.className = 'photo-item';
-                const path = `images/khs/${folder}/${i}.JPG`;
+                const path = `images/khs/${folder}/${i}.jpg`;
                 item.innerHTML = `<img src="${path}" onclick="openLB('${path}')" onerror="this.parentElement.style.display='none'">`;
                 gallery.appendChild(item);
             }
