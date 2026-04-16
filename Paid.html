@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paid Shoots | Chase Studios</title>
+    <title>Gallery | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,42 +15,33 @@
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1 style="color: #ffd700;">Paid Portfolio</h1>
-            <p style="opacity: 0.8;">Premium Quality • Private Sessions</p>
+            <h1 id="gallery-title">Gallery</h1>
+            <p class="about-me">The Ultimate Production Crossover | Digital Creator & Producer</p>
         </header>
 
-        <div class="photo-grid" id="paid-gallery"></div>
+        <div class="photo-grid" id="gallery"></div>
 
-        <div style="margin-top: 50px; padding: 30px 20px; background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 30px;">
-            <h2 style="color: #ffd700; margin-bottom: 10px;">Ready for your own shoot?</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 25px; opacity: 0.9;">Professional sports, portraits, and creative production.</p>
-            <a href="https://instagram.com/chas3.lol" class="bubble" style="background: #ffd700; color: #000; font-weight: bold; width: 80%; display: inline-block;">DM TO BOOK</a>
-        </div>
-
-        <a href="index.html" class="bubble back-btn">Return Home</a>
+        <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block; background:white; color:black;">Return Home</a>
     </div>
 
     <div id="lightbox" class="lightbox" onclick="this.style.display='none'"><img class="lightbox-content" id="lb-img"></div>
 
     <script>
-        const folder = "images/paid/";
-        const count = 6; // Show your top 6 favorite shots
-        const g = document.getElementById('paid-gallery');
+        /* CONFIG: Change folderPath as needed */
+        const folderPath = "images/paid/"; // OR images/bts/ OR images/paid/
+        const galleryTitle = "Personal Shoots"; // Title for the top
+        
+        document.getElementById('gallery-title').innerText = galleryTitle;
+        const gallery = document.getElementById('gallery');
 
-        for (let i = 1; i <= count; i++) {
+        for (let i = 1; i <= 50; i++) {
             const item = document.createElement('div');
             item.className = 'photo-item';
-            const img = document.createElement('img');
-            
-            img.src = `${folder}${i}.JPG`;
-            img.onclick = () => { document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=img.src; };
-            img.onerror = function() {
-                if (this.src.includes('.JPG')) { this.src = `${folder}${i}.jpg`; }
-                else { this.parentElement.style.display = 'none'; }
-            };
-            item.appendChild(img);
-            g.appendChild(item);
+            const path = `${folderPath}${i}.JPG`;
+            item.innerHTML = `<img src="${path}" onclick="openLB('${path}')" onerror="this.parentElement.style.display='none'">`;
+            gallery.appendChild(item);
         }
+        function openLB(s) { document.getElementById('lb-img').src = s; document.getElementById('lightbox').style.display='flex'; }
     </script>
 </body>
 </html>
