@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>KHS Sports</title><link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8"><title>KHS Sports | Chase Studios</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -12,44 +13,51 @@
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1>Chase Studios</h1>
-            <p class="about-me">The Ultimate Production Crossover | Digital Creator</p>
+            <h1>Kauai High School</h1>
+            <p style="opacity:0.6; font-size:0.8rem;">Select a Category</p>
         </header>
 
         <nav class="category-nav">
-            <div class="bubble" onclick="loadSport('basketball', 'Basketball')">Basketball</div>
-            <div class="bubble" onclick="loadSport('football', 'Football')">Football</div>
-            <div class="bubble" onclick="loadSport('soccer', 'Soccer')">Soccer</div>
-            <div class="bubble" onclick="loadSport('track', 'Track')">Track</div>
-            <div class="bubble" onclick="loadSport('cross-country', 'XC')">XC</div>
-            <div class="bubble" onclick="loadSport('bowling', 'Bowling')">Bowling</div>
-            <div class="bubble" onclick="loadSport('volleyball', 'Volleyball')">Volleyball</div>
-            <div class="bubble" onclick="loadSport('events', 'Events')">Events</div>
+            <div class="bubble" onclick="loadSport('football')">Football</div>
+            <div class="bubble" onclick="loadSport('basketball')">Basketball</div>
+            <div class="bubble" onclick="loadSport('soccer')">Soccer</div>
+            <div class="bubble" onclick="loadSport('volleyball')">Volleyball</div>
+            <div class="bubble" onclick="loadSport('xc')">Cross Country</div>
+            <div class="bubble" onclick="loadSport('bowling')">Bowling</div>
+            <div class="bubble" onclick="loadSport('track')">Track</div>
+            <div class="bubble" onclick="loadSport('events')">Events</div>
         </nav>
 
         <div class="photo-grid" id="gallery"></div>
-        <a href="index.html" class="bubble" style="margin-top:30px;">Return Home</a>
+        
+        <div style="margin-top: 40px;">
+            <a href="index.html" class="bubble">Return Home</a>
+        </div>
     </div>
 
     <div id="lightbox" class="lightbox">
-        <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
+        <span style="position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer;" onclick="this.parentElement.style.display='none'">&times;</span>
         <img class="lightbox-content" id="lb-img">
         <a id="dl-btn" href="" download>Download</a>
     </div>
 
     <script>
-        const username = "Chase-Studios"; 
+        // CHANGE THESE TO YOUR GITHUB DETAILS
+        const username = "chase-studios"; 
         const repo = "Chase-Studio";
 
         async function loadSport(sport) {
             const gallery = document.getElementById('gallery');
-            gallery.innerHTML = "Loading...";
+            gallery.innerHTML = "<p>Loading " + sport + "...</p>";
             try {
                 const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/images/khs/${sport}`);
                 const files = await response.json();
+                
+                if(!Array.isArray(files)) throw new Error();
+
                 gallery.innerHTML = "";
                 files.forEach(file => {
-                    if (file.name.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                    if (file.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
                         const item = document.createElement('div');
                         item.className = 'photo-item';
                         const img = document.createElement('img');
@@ -64,7 +72,9 @@
                         gallery.appendChild(item);
                     }
                 });
-            } catch (e) { gallery.innerHTML = "Error loading category."; }
+            } catch (e) { 
+                gallery.innerHTML = "<p style='grid-column:1/-1; opacity:0.5;'>No photos found in the " + sport + " folder.</p>"; 
+            }
         }
         window.onload = () => loadSport('football');
     </script>
