@@ -8,19 +8,25 @@
 body { margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-dark); color: var(--text); display: flex; justify-content: center; }
 .background-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('images/background.jpg') center/cover no-repeat; z-index: -1; }
 
+/* Glass Card */
 .container { background: var(--glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 40px; padding: 60px 25px; margin: 40px 15px; width: 100%; max-width: 650px; text-align: center; }
 
+/* Logos & Quote */
 .triple-logo-wrap { display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
-.circle-frame { border-radius: 50%; overflow: hidden; border: 2px solid var(--glass-border); background: #111; display: flex; align-items: center; justify-content: center; transition: 0.4s; }
-.circle-frame img { width: 100%; height: 100%; object-fit: cover; }
+.circle-frame { border-radius: 50%; overflow: hidden; border: 2px solid var(--glass-border); background: #111; display: flex; align-items: center; justify-content: center; }
 .frame-side { width: 80px; height: 80px; margin: 0 -15px; z-index: 1; opacity: 0.7; }
-.frame-center { width: 115px; height: 115px; z-index: 5; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+.frame-center { width: 115px; height: 115px; z-index: 5; border-color: #fff; }
 .about-me { font-size: 0.85rem; opacity: 0.7; margin-bottom: 30px; letter-spacing: 0.5px; }
 
+/* Social Links */
 .social-bubbles { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
 .bubble { padding: 12px 20px; border-radius: 50px; background: rgba(255, 255, 255, 0.08); color: white; text-decoration: none; font-weight: 700; font-size: 0.8rem; border: 1px solid var(--glass-border); transition: 0.3s; cursor: pointer; }
 .bubble:hover { background: white; color: black; }
 
+/* The Fixed Return Button */
+.return-btn { margin-top: 60px; display: inline-block; width: auto; background: rgba(255,255,255,0.1); }
+
+/* Grid & Hover */
 .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 .photo-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; border: 1px solid var(--glass-border); }
 .photo-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; transition: 0.5s; }
@@ -30,9 +36,12 @@ body { margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; back
 .album-overlay span { color: white; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; border: 1px solid white; padding: 6px 12px; border-radius: 8px; }
 .photo-item:hover .album-overlay { opacity: 1; }
 
+/* Lightbox & Small Download */
 .lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(15px); justify-content: center; align-items: center; flex-direction: column; }
 .lightbox-content { max-width: 90%; max-height: 70vh; border-radius: 10px; }
 #dl-btn { background: white !important; color: black !important; margin-top: 15px; padding: 8px 18px; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; }
 .close { position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; cursor: pointer; }
 
+/* KHS Scroller */
 .category-nav { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 15px; margin-bottom: 25px; scrollbar-width: none; }
+.category-nav::-webkit-scrollbar { display: none; }
