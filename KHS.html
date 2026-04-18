@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KHS Sports | Chase Studios</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8"><title>KHS Sports</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -16,96 +13,52 @@
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
             <h1>KHS Portfolio</h1>
-            <p class="about-me">The Ultimate Production Crossover | Digital Creator</p>
+            <p class="about-me">The Ultimate Production Crossover</p>
         </header>
 
         <nav class="category-nav">
-            <div class="bubble" onclick="loadSport('basketball', 'Basketball')">Basketball</div>
-            <div class="bubble" onclick="loadSport('football', 'Football')">Football</div>
-            <div class="bubble" onclick="loadSport('soccer', 'Soccer')">Soccer</div>
-            <div class="bubble" onclick="loadSport('track', 'Track')">Track</div>
-            <div class="bubble" onclick="loadSport('cross-country', 'XC')">XC</div>
-            <div class="bubble" onclick="loadSport('bowling', 'Bowling')">Bowling</div>
-            <div class="bubble" onclick="loadSport('volleyball', 'Volleyball')">Volleyball</div>
-            <div class="bubble" onclick="loadSport('events', 'Events')">Events</div>
+            <div class="bubble" onclick="loadSport('football')">Football</div>
+            <div class="bubble" onclick="loadSport('basketball')">Basketball</div>
+            <div class="bubble" onclick="loadSport('soccer')">Soccer</div>
+            <div class="bubble" onclick="loadSport('track')">Track</div>
+            <div class="bubble" onclick="loadSport('events')">Events</div>
         </nav>
 
-        <h3 id="sport-title" style="text-transform: uppercase; opacity: 0.5; font-size: 0.7rem; letter-spacing: 2px;">Select Category</h3>
-        
         <div class="photo-grid" id="gallery"></div>
-        
-        <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block;">Return Home</a>
+        <a href="index.html" class="bubble" style="margin-top:30px;">Return Home</a>
     </div>
 
     <div id="lightbox" class="lightbox">
-        <span class="close" onclick="document.getElementById('lightbox').style.display='none'">&times;</span>
+        <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
         <img class="lightbox-content" id="lb-img">
-        <a id="dl-btn" href="" download>Download Image</a>
+        <a id="dl-btn" href="" download>Download</a>
     </div>
 
     <script>
-        /* MASTER DATA: 
-           Add your filenames here for each sport. 
-           Make sure the names match exactly what is in your folders.
-        */
         const sportsData = {
-            football: [
-                "IMG_1111.JPG",
-                "IMG_2222.PNG",
-                "action_shot.jpg"
-            ],
-            basketball: [
-                "hoops1.png",
-                "IMG_4444.JPG"
-            ],
-            soccer: [
-                "goal.jpg"
-            ],
-            track: [],
-            events: []
+            football: ["IMG_1234.PNG", "action1.jpg"],
+            basketball: ["hoops.png"],
+            soccer: [], track: [], events: []
         };
 
-        function loadSport(category) {
-            const gallery = document.getElementById('gallery');
-            const title = document.getElementById('sport-title');
-            
-            // Update UI
-            title.innerText = category;
-            gallery.innerHTML = "";
-
-            // Get the list of images for this sport
-            const images = sportsData[category];
-
-            if (!images || images.length === 0) {
-                gallery.innerHTML = "<p style='opacity:0.5; grid-column: 1/-1;'>No photos uploaded yet.</p>";
-                return;
-            }
-
-            images.forEach(fileName => {
+        function loadSport(cat) {
+            const g = document.getElementById('gallery');
+            g.innerHTML = "";
+            (sportsData[cat] || []).forEach(name => {
                 const item = document.createElement('div');
                 item.className = 'photo-item';
-                
                 const img = document.createElement('img');
-                const fullPath = `images/khs/${category}/${fileName}`;
-
-                img.src = fullPath;
-                
+                img.src = `images/khs/${cat}/${name}`;
                 img.onclick = () => {
                     document.getElementById('lb-img').src = img.src;
-                    const dl = document.getElementById('dl-btn');
-                    dl.href = img.src;
-                    dl.setAttribute('download', fileName);
+                    document.getElementById('dl-btn').href = img.src;
+                    document.getElementById('dl-btn').setAttribute('download', name);
                     document.getElementById('lightbox').style.display = 'flex';
                 };
-
-                img.onerror = () => item.style.display = 'none';
-
                 item.appendChild(img);
-                gallery.appendChild(item);
+                g.appendChild(item);
             });
         }
-
-        // Set default category to load on start
         window.onload = () => loadSport('football');
     </script>
 </body>
