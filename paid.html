@@ -7,54 +7,50 @@
 <body>
     <div class="background-overlay"></div>
     <div class="container">
-        <header class="triple-header">
+        <header>
             <div class="triple-logo-wrap">
                 <div class="circle-frame frame-side"><img src="images/logo1.png"></div>
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1 id="gallery-title">Gallery</h1>
-            <p class="about-me">The Ultimate Production Crossover | Digital Creator & Producer</p>
+            <h1 id="title">Gallery</h1>
         </header>
 
         <div class="photo-grid" id="gallery"></div>
-        <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block; background:white; color:black;">Return Home</a>
+        <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block;">Return Home</a>
     </div>
 
     <div id="lightbox" class="lightbox">
         <span class="close" onclick="document.getElementById('lightbox').style.display='none'">&times;</span>
         <img class="lightbox-content" id="lb-img">
-        <a id="dl-btn" href="" download class="bubble">Download Image</a>
+        <a id="dl-btn" href="" download>Download Image</a>
     </div>
 
     <script>
-        const folderPath = "images/shoots/"; // CHANGE THIS PER PAGE
-        const gallery = document.getElementById('gallery');
+        /* UPDATE THESE TWO FOR EACH PAGE */
+        const folderPath = "images/paid/"; 
+        const imageList = [
+            "IMG_1234.PNG", 
+            "IMG_5678.JPG",
+            "ANY_NAME.png"
+        ];
 
-        for (let i = 1; i <= 100; i++) {
+        const gallery = document.getElementById('gallery');
+        imageList.forEach(name => {
             const item = document.createElement('div');
             item.className = 'photo-item';
             const img = document.createElement('img');
-            const formats = [".JPG", ".PNG", ".jpg", ".png"];
-            let fIdx = 0;
-
-            img.onerror = function() {
-                fIdx++;
-                if (fIdx < formats.length) { this.src = `${folderPath}${i}${formats[fIdx]}`; }
-                else { this.parentElement.style.display = 'none'; }
+            img.src = folderPath + name;
+            img.onclick = () => {
+                document.getElementById('lb-img').src = img.src;
+                const dl = document.getElementById('dl-btn');
+                dl.href = img.src; dl.setAttribute('download', name);
+                document.getElementById('lightbox').style.display = 'flex';
             };
-
-            img.src = `${folderPath}${i}${formats[0]}`;
-            img.onclick = function() { openLB(this.src); };
+            img.onerror = () => item.style.display = 'none';
             item.appendChild(img);
             gallery.appendChild(item);
-        }
-        function openLB(s) {
-            document.getElementById('lb-img').src = s;
-            const dl = document.getElementById('dl-btn');
-            dl.href = s; dl.setAttribute('download', s.split('/').pop());
-            document.getElementById('lightbox').style.display = 'flex';
-        }
+        });
     </script>
 </body>
 </html>
