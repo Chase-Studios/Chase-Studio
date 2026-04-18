@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>Gallery | Chase Studios</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8"><title>Gallery</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -13,29 +12,23 @@
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1 id="title">Gallery</h1>
+            <h1>Gallery</h1>
         </header>
-
         <div class="photo-grid" id="gallery"></div>
-        <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block;">Return Home</a>
+        <a href="index.html" class="bubble" style="margin-top:30px;">Return Home</a>
     </div>
 
     <div id="lightbox" class="lightbox">
-        <span class="close" onclick="document.getElementById('lightbox').style.display='none'">&times;</span>
+        <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
         <img class="lightbox-content" id="lb-img">
-        <a id="dl-btn" href="" download>Download Image</a>
+        <a id="dl-btn" href="" download>Download</a>
     </div>
 
     <script>
-        /* UPDATE THESE TWO FOR EACH PAGE */
         const folderPath = "images/shoots/"; 
-        const imageList = [
-            "IMG_1234.PNG", 
-            "IMG_5678.JPG",
-            "ANY_NAME.png"
-        ];
+        const imageList = ["IMG_1234.PNG", "my_photo.jpg"]; // ADD NAMES HERE
 
-        const gallery = document.getElementById('gallery');
+        const g = document.getElementById('gallery');
         imageList.forEach(name => {
             const item = document.createElement('div');
             item.className = 'photo-item';
@@ -43,13 +36,12 @@
             img.src = folderPath + name;
             img.onclick = () => {
                 document.getElementById('lb-img').src = img.src;
-                const dl = document.getElementById('dl-btn');
-                dl.href = img.src; dl.setAttribute('download', name);
+                document.getElementById('dl-btn').href = img.src;
+                document.getElementById('dl-btn').setAttribute('download', name);
                 document.getElementById('lightbox').style.display = 'flex';
             };
-            img.onerror = () => item.style.display = 'none';
             item.appendChild(img);
-            gallery.appendChild(item);
+            g.appendChild(item);
         });
     </script>
 </body>
