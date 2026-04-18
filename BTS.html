@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | Chase Studios</title>
+    <meta charset="UTF-8"><title>Gallery | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,28 +18,43 @@
         </header>
 
         <div class="photo-grid" id="gallery"></div>
-
         <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block; background:white; color:black;">Return Home</a>
     </div>
 
-    <div id="lightbox" class="lightbox" onclick="this.style.display='none'"><img class="lightbox-content" id="lb-img"></div>
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="document.getElementById('lightbox').style.display='none'">&times;</span>
+        <img class="lightbox-content" id="lb-img">
+        <a id="dl-btn" href="" download class="bubble">Download Image</a>
+    </div>
 
     <script>
-        /* CONFIG: Change folderPath as needed */
-        const folderPath = "images/bts/"; // OR images/bts/ OR images/paid/
-        const galleryTitle = "Behind The Scenes"; // Title for the top
-        
-        document.getElementById('gallery-title').innerText = galleryTitle;
+        const folderPath = "images/shoots/"; // CHANGE THIS PER PAGE
         const gallery = document.getElementById('gallery');
 
-        for (let i = 1; i <= 50; i++) {
+        for (let i = 1; i <= 100; i++) {
             const item = document.createElement('div');
             item.className = 'photo-item';
-            const path = `${folderPath}${i}.jpg`;
-            item.innerHTML = `<img src="${path}" onclick="openLB('${path}')" onerror="this.parentElement.style.display='none'">`;
+            const img = document.createElement('img');
+            const formats = [".JPG", ".PNG", ".jpg", ".png"];
+            let fIdx = 0;
+
+            img.onerror = function() {
+                fIdx++;
+                if (fIdx < formats.length) { this.src = `${folderPath}${i}${formats[fIdx]}`; }
+                else { this.parentElement.style.display = 'none'; }
+            };
+
+            img.src = `${folderPath}${i}${formats[0]}`;
+            img.onclick = function() { openLB(this.src); };
+            item.appendChild(img);
             gallery.appendChild(item);
         }
-        function openLB(s) { document.getElementById('lb-img').src = s; document.getElementById('lightbox').style.display='flex'; }
+        function openLB(s) {
+            document.getElementById('lb-img').src = s;
+            const dl = document.getElementById('dl-btn');
+            dl.href = s; dl.setAttribute('download', s.split('/').pop());
+            document.getElementById('lightbox').style.display = 'flex';
+        }
     </script>
 </body>
 </html>
