@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>KHS Sports | Chase Studios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHS Sports | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
     <div class="container">
-        <header class="triple-header">
+        <header>
             <div class="triple-logo-wrap">
                 <div class="circle-frame frame-side"><img src="images/logo1.png"></div>
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
             <h1>KHS Portfolio</h1>
-            <p class="about-me">The Ultimate Production Crossover | Digital Creator & Producer</p>
+            <p class="about-me">The Ultimate Production Crossover | Digital Creator</p>
         </header>
 
         <nav class="category-nav">
@@ -27,47 +29,84 @@
             <div class="bubble" onclick="loadSport('volleyball', 'Volleyball')">Volleyball</div>
             <div class="bubble" onclick="loadSport('events', 'Events')">Events</div>
         </nav>
-        <h3 id="sport-title" style="text-transform: uppercase; opacity: 0.5; font-size: 0.7rem;">Select Category</h3>
+
+        <h3 id="sport-title" style="text-transform: uppercase; opacity: 0.5; font-size: 0.7rem; letter-spacing: 2px;">Select Category</h3>
         
         <div class="photo-grid" id="gallery"></div>
-        <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block; background:white; color:black;">Return Home</a>
+        
+        <a href="index.html" class="bubble" style="margin-top:30px; display:inline-block;">Return Home</a>
     </div>
 
     <div id="lightbox" class="lightbox">
         <span class="close" onclick="document.getElementById('lightbox').style.display='none'">&times;</span>
         <img class="lightbox-content" id="lb-img">
-        <a id="dl-btn" href="" download class="bubble">Download Image</a>
+        <a id="dl-btn" href="" download>Download Image</a>
     </div>
 
     <script>
-        function loadSport(folder, label) {
+        /* MASTER DATA: 
+           Add your filenames here for each sport. 
+           Make sure the names match exactly what is in your folders.
+        */
+        const sportsData = {
+            football: [
+                "IMG_1111.JPG",
+                "IMG_2222.PNG",
+                "action_shot.jpg"
+            ],
+            basketball: [
+                "hoops1.png",
+                "IMG_4444.JPG"
+            ],
+            soccer: [
+                "goal.jpg"
+            ],
+            track: [],
+            events: []
+        };
+
+        function loadSport(category) {
             const gallery = document.getElementById('gallery');
-            document.getElementById('sport-title').innerText = label;
+            const title = document.getElementById('sport-title');
+            
+            // Update UI
+            title.innerText = category;
             gallery.innerHTML = "";
-            for (let i = 1; i <= 100; i++) {
+
+            // Get the list of images for this sport
+            const images = sportsData[category];
+
+            if (!images || images.length === 0) {
+                gallery.innerHTML = "<p style='opacity:0.5; grid-column: 1/-1;'>No photos uploaded yet.</p>";
+                return;
+            }
+
+            images.forEach(fileName => {
                 const item = document.createElement('div');
                 item.className = 'photo-item';
+                
                 const img = document.createElement('img');
-                const formats = [".JPG", ".PNG", ".jpg", ".png"];
-                let fIdx = 0;
-                img.onerror = function() {
-                    fIdx++;
-                    if (fIdx < formats.length) { this.src = `images/khs/${folder}/${i}${formats[fIdx]}`; }
-                    else { this.parentElement.style.display = 'none'; }
+                const fullPath = `images/khs/${category}/${fileName}`;
+
+                img.src = fullPath;
+                
+                img.onclick = () => {
+                    document.getElementById('lb-img').src = img.src;
+                    const dl = document.getElementById('dl-btn');
+                    dl.href = img.src;
+                    dl.setAttribute('download', fileName);
+                    document.getElementById('lightbox').style.display = 'flex';
                 };
-                img.src = `images/khs/${folder}/${i}${formats[0]}`;
-                img.onclick = function() { openLB(this.src); };
+
+                img.onerror = () => item.style.display = 'none';
+
                 item.appendChild(img);
                 gallery.appendChild(item);
-            }
+            });
         }
-        function openLB(s) {
-            document.getElementById('lb-img').src = s;
-            const dl = document.getElementById('dl-btn');
-            dl.href = s; dl.setAttribute('download', s.split('/').pop());
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-        window.onload = () => loadSport('football', 'Football');
+
+        // Set default category to load on start
+        window.onload = () => loadSport('football');
     </script>
 </body>
 </html>
