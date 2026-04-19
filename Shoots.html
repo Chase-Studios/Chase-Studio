@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>Gallery | Chase Studios</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,51 +14,51 @@
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1>Chase Studios</h1>
-            <p class="about-me">The Ultimate Production Crossover | Digital Creator</p>
+            <h1 id="page-title">Gallery</h1>
+            <p class="about-me">The Ultimate Production Crossover</p>
         </header>
-        <div class="photo-grid" id="gallery">Loading photos...</div>
-        <a href="index.html" class="bubble" style="margin-top:30px;">Return Home</a>
+
+        <div class="photo-grid" id="gallery"></div>
+
+        <div style="margin-top: 50px;">
+            <a href="index.html" class="bubble">Return Home</a>
+        </div>
     </div>
 
     <div id="lightbox" class="lightbox">
-        <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
+        <span style="position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer;" onclick="this.parentElement.style.display='none'">&times;</span>
         <img class="lightbox-content" id="lb-img">
-        <a id="dl-btn" href="" download>Download</a>
+        <a id="dl-btn" href="" download>Download Image</a>
     </div>
 
     <script>
-        // UPDATE THESE TWO PER PAGE
-        const username = "Chase-Studios"; 
-        const repo = "Chase-Studio";
-        const folder = "images/shoots"; // The path to the images
+        /* CHANGE THIS PATH FOR EACH PAGE */
+        // For Shoots.html use: "images/shoots/"
+        // For BTS.html use: "images/bts/"
+        // For paid.html use: "images/paid/"
+        const folderPath = "images/shoots/"; 
 
-        async function loadPhotos() {
-            const gallery = document.getElementById('gallery');
-            try {
-                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folder}`);
-                const files = await response.json();
-                gallery.innerHTML = "";
+        const gallery = document.getElementById('gallery');
+        for (let i = 1; i <= 40; i++) {
+            const item = document.createElement('div');
+            item.className = 'photo-item';
+            
+            const img = document.createElement('img');
+            const fullPath = folderPath + i + ".jpg";
+            img.src = fullPath;
+            
+            img.onclick = function() {
+                document.getElementById('lb-img').src = this.src;
+                document.getElementById('dl-btn').href = this.src;
+                document.getElementById('lightbox').style.display = 'flex';
+            };
 
-                files.forEach(file => {
-                    if (file.name.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-                        const item = document.createElement('div');
-                        item.className = 'photo-item';
-                        const img = document.createElement('img');
-                        img.src = file.download_url;
-                        img.onclick = () => {
-                            document.getElementById('lb-img').src = img.src;
-                            document.getElementById('dl-btn').href = img.src;
-                            document.getElementById('dl-btn').setAttribute('download', file.name);
-                            document.getElementById('lightbox').style.display = 'flex';
-                        };
-                        item.appendChild(img);
-                        gallery.appendChild(item);
-                    }
-                });
-            } catch (e) { gallery.innerHTML = "Error loading photos."; }
+            // Hide the box if the image doesn't exist
+            img.onerror = function() { this.parentElement.style.display = 'none'; };
+            
+            item.appendChild(img);
+            gallery.appendChild(item);
         }
-        loadPhotos();
     </script>
 </body>
 </html>
