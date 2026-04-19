@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | Chase Studios</title>
+    <title>Paid Work | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,48 +14,40 @@
                 <div class="circle-frame frame-center"><img src="images/logo-main.png"></div>
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
-            <h1 id="page-title">Gallery</h1>
-            <p class="about-me">The Ultimate Production Crossover</p>
+            <h1>Paid Work</h1>
+            <p style="opacity:0.7; font-size:0.85rem;">Professional Production Services</p>
         </header>
 
         <div class="photo-grid" id="gallery"></div>
-
-        <div style="margin-top: 50px;">
-            <a href="index.html" class="bubble">Return Home</a>
-        </div>
+        <a href="index.html" class="bubble" style="display:inline-block; margin-top: 20px;">Return Home</a>
     </div>
 
-    <div id="lightbox" class="lightbox">
-        <span style="position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer;" onclick="this.parentElement.style.display='none'">&times;</span>
+    <div id="lightbox" class="lightbox" onclick="if(event.target == this) this.style.display='none'">
         <img class="lightbox-content" id="lb-img">
-        <a id="dl-btn" href="" download>Download Image</a>
+        
+        <a id="book-btn" href="https://instagram.com/chyston.studio" target="_blank">DM TO BOOK</a>
+        
+        <p style="color:rgba(255,255,255,0.5); font-size:0.6rem; margin-top:15px;">Click outside to close</p>
     </div>
 
     <script>
-        /* CHANGE THIS PATH FOR EACH PAGE */
-        // For Shoots.html use: "images/shoots/"
-        // For BTS.html use: "images/bts/"
-        // For paid.html use: "images/paid/"
-        const folderPath = "images/paid/"; 
-
+        const folder = "images/paid/"; 
         const gallery = document.getElementById('gallery');
+        
         for (let i = 1; i <= 40; i++) {
-            const item = document.createElement('div');
-            item.className = 'photo-item';
-            
             const img = document.createElement('img');
-            const fullPath = folderPath + i + ".jpg";
-            img.src = fullPath;
+            const path = folder + i + ".jpg";
+            img.src = path;
             
-            img.onclick = function() {
-                document.getElementById('lb-img').src = this.src;
-                document.getElementById('dl-btn').href = this.src;
+            img.onclick = () => {
+                document.getElementById('lb-img').src = path;
                 document.getElementById('lightbox').style.display = 'flex';
             };
-
-            // Hide the box if the image doesn't exist
+            
             img.onerror = function() { this.parentElement.style.display = 'none'; };
             
+            const item = document.createElement('div');
+            item.className = 'photo-item';
             item.appendChild(img);
             gallery.appendChild(item);
         }
