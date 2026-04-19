@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>KHS Sports | Chase Studios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHS Sports | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,7 +30,10 @@
         </nav>
 
         <div class="photo-grid" id="gallery"></div>
-        <a href="index.html" class="bubble">Return Home</a>
+        
+        <div style="margin-top: 30px;">
+            <a href="index.html" class="bubble">Return Home</a>
+        </div>
     </div>
 
     <div id="lightbox" class="lightbox" onclick="if(event.target == this) this.style.display='none'">
@@ -39,23 +44,29 @@
     <script>
         function loadSport(sport) {
             const gallery = document.getElementById('gallery');
-            gallery.innerHTML = "";
+            gallery.innerHTML = ""; // Clear current images
+            
             for (let i = 1; i <= 30; i++) {
                 const path = `images/khs/${sport}/${i}.jpg`;
                 const item = document.createElement('div');
                 item.className = 'photo-item';
+                
                 const img = document.createElement('img');
                 img.src = path;
                 img.onclick = () => {
                     document.getElementById('lb-img').src = path;
-                    document.getElementById('dl-btn').href = path;
+                    document.getElementById('dl-btn').href = path; // Fixes the download link
                     document.getElementById('lightbox').style.display = 'flex';
                 };
+                
+                // If image doesn't exist (e.g., only 5 photos in folder), hide the box
                 img.onerror = function() { this.parentElement.remove(); };
+                
                 item.appendChild(img);
                 gallery.appendChild(item);
             }
         }
+        // Load football by default when page opens
         window.onload = () => loadSport('football');
     </script>
 </body>
