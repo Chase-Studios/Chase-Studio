@@ -199,3 +199,18 @@ body {
     background: var(--accent); 
     transform: scale(1.05); 
 }
+.social-bubbles {
+    display: flex;
+    flex-wrap: wrap;         /* Allows bubbles to wrap to a new line */
+    justify-content: center;   /* Keeps them centered */
+    gap: 8px;                /* Space between each bubble */
+    margin: 20px auto;       /* Centers the whole menu */
+    max-width: 90%;          /* Keeps them inside the glass container */
+}
+
+.social-bubbles .bubble {
+    flex: 0 1 auto;          /* Let bubbles grow/shrink naturally */
+    font-size: 0.7rem;       /* Small, clean text */
+    padding: 10px 18px;      /* Comfortable clicking area */
+    white-space: nowrap;     /* Keeps name on one line */
+}
