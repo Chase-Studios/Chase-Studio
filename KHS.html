@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>KHS Sports</title><link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8"><title>KHS Sports | Chase Studios</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -27,13 +28,12 @@
         </nav>
 
         <div class="photo-grid" id="gallery"></div>
-        <a href="index.html" class="bubble" style="margin-top:40px;">Return Home</a>
+        <a href="index.html" class="bubble">Return Home</a>
     </div>
 
-    <div id="lightbox" class="lightbox">
-        <span style="position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer;" onclick="this.parentElement.style.display='none'">&times;</span>
+    <div id="lightbox" class="lightbox" onclick="if(event.target == this) this.style.display='none'">
         <img class="lightbox-content" id="lb-img">
-        <a id="dl-btn" href="" download>Download Image</a>
+        <a id="dl-btn" class="action-btn" href="#" download>Download Image</a>
     </div>
 
     <script>
@@ -41,18 +41,17 @@
             const gallery = document.getElementById('gallery');
             gallery.innerHTML = "";
             for (let i = 1; i <= 30; i++) {
-                const img = document.createElement('img');
                 const path = `images/khs/${sport}/${i}.jpg`;
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                const img = document.createElement('img');
                 img.src = path;
                 img.onclick = () => {
                     document.getElementById('lb-img').src = path;
                     document.getElementById('dl-btn').href = path;
                     document.getElementById('lightbox').style.display = 'flex';
                 };
-                img.onerror = function() { this.style.display = 'none'; };
-                
-                const item = document.createElement('div');
-                item.className = 'photo-item';
+                img.onerror = function() { this.parentElement.remove(); };
                 item.appendChild(img);
                 gallery.appendChild(item);
             }
