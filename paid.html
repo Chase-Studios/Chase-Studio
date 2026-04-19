@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paid Work | Chase Studios</title>
+    <meta charset="UTF-8"><title>Paid Work | Chase Studios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,39 +14,29 @@
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
             <h1>Paid Work</h1>
-            <p style="opacity:0.7; font-size:0.85rem;">Professional Production Services</p>
         </header>
-
         <div class="photo-grid" id="gallery"></div>
-        <a href="index.html" class="bubble" style="display:inline-block; margin-top: 20px;">Return Home</a>
+        <a href="index.html" class="bubble">Return Home</a>
     </div>
 
     <div id="lightbox" class="lightbox" onclick="if(event.target == this) this.style.display='none'">
         <img class="lightbox-content" id="lb-img">
-        
-        <a id="book-btn" href="https://instagram.com/chyston.studio" target="_blank">DM TO BOOK</a>
-        
-        <p style="color:rgba(255,255,255,0.5); font-size:0.6rem; margin-top:15px;">Click outside to close</p>
+        <a href="https://instagram.com/chyston.studio" target="_blank" class="action-btn">DM TO BOOK</a>
     </div>
 
     <script>
-        const folder = "images/paid/"; 
         const gallery = document.getElementById('gallery');
-        
         for (let i = 1; i <= 40; i++) {
+            const path = `images/paid/${i}.jpg`;
+            const item = document.createElement('div');
+            item.className = 'photo-item';
             const img = document.createElement('img');
-            const path = folder + i + ".jpg";
             img.src = path;
-            
             img.onclick = () => {
                 document.getElementById('lb-img').src = path;
                 document.getElementById('lightbox').style.display = 'flex';
             };
-            
-            img.onerror = function() { this.parentElement.style.display = 'none'; };
-            
-            const item = document.createElement('div');
-            item.className = 'photo-item';
+            img.onerror = function() { this.parentElement.remove(); };
             item.appendChild(img);
             gallery.appendChild(item);
         }
