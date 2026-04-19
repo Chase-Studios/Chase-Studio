@@ -24,44 +24,42 @@ body {
     text-align: center; overflow: hidden;
 }
 
-/* Logos */
+/* Logos - Fixed Sizes */
 .triple-logo-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
-.circle-frame { border-radius: 50%; overflow: hidden; border: 2px solid var(--glass-border); background: #000; flex-shrink: 0; }
-.frame-side { width: 80px; height: 80px; margin: 0 -15px; z-index: 1; opacity: 0.6; }
-.frame-center { width: 110px; height: 110px; z-index: 5; border-color: #fff; }
+.circle-frame { border-radius: 50%; overflow: hidden; border: 2px solid var(--glass-border); background: #000; flex-shrink: 0; aspect-ratio: 1/1; }
+.frame-side { width: 85px; height: 85px; margin: 0 -15px; z-index: 1; opacity: 0.6; }
+.frame-center { width: 120px; height: 120px; z-index: 5; border-color: #fff; }
 .circle-frame img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Horizontal Bubbles Fix */
+/* Horizontal Sports Menu */
 .category-nav {
     display: flex; overflow-x: auto; gap: 10px; padding: 10px 5px;
-    margin-bottom: 30px; scrollbar-width: none; /* Hides scrollbar on Firefox */
-    justify-content: flex-start;
+    margin-bottom: 30px; scrollbar-width: none; justify-content: flex-start;
 }
-.category-nav::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome/Safari */
+.category-nav::-webkit-scrollbar { display: none; }
 
 .bubble { 
-    padding: 10px 22px; border-radius: 50px; background: rgba(255,255,255,0.1);
+    padding: 12px 22px; border-radius: 50px; background: rgba(255,255,255,0.1);
     color: white; text-decoration: none; font-size: 0.75rem; font-weight: 700;
     border: 1px solid var(--glass-border); transition: 0.3s; white-space: nowrap; cursor: pointer;
 }
 .bubble:hover { background: white; color: black; }
 
-/* The Grid */
+/* Grid Layout */
 .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; margin-bottom: 40px; }
-.photo-item { border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); cursor: pointer; background: #111; aspect-ratio: 1/1; }
-.photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-item { border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); aspect-ratio: 1/1; background: #111; }
+.photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 
-/* Lightbox & Download Button */
+/* Lightbox & Action Buttons */
 .lightbox { 
     display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(0,0,0,0.95); backdrop-filter: blur(15px);
     justify-content: center; align-items: center; flex-direction: column; 
 }
-.lightbox-content { max-width: 90%; max-height: 70vh; border-radius: 15px; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+.lightbox-content { max-width: 90%; max-height: 70vh; border-radius: 15px; }
 
-#dl-btn { 
-    margin-top: 25px; padding: 12px 25px; background: white; color: black;
-    text-decoration: none; border-radius: 50px; font-weight: 900; font-size: 0.7rem;
+.action-btn { 
+    margin-top: 25px; padding: 15px 30px; background: white; color: black;
+    text-decoration: none; border-radius: 50px; font-weight: 900; font-size: 0.8rem;
     text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
 }
-#dl-btn:hover { transform: scale(1.05); background: #eee; }
