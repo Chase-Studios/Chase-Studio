@@ -1,72 +1,51 @@
-/* --- Chase Studios Merge Loader (v8.1 - Final Scale Fix) --- */
+/* --- Chase Studios Master CSS v9.0 --- */
+
+/* 1. FULL SCREEN MERGE LOADER */
 #loader-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: #000000;
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #000; z-index: 99999;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 1; transition: opacity 0.6s ease-in-out;
     overflow: hidden;
-    opacity: 1;
-    transition: opacity 0.6s ease;
 }
 
 .loader-wrapper {
-    position: relative;
-    width: 250px; /* This is the 'cage' for your logos */
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative; width: 250px; height: 250px;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .loader-img {
-    position: absolute;
-    border-radius: 50%;
-    object-fit: cover;
-    /* This is the magic fix - prevents the 'Too Big' issue */
-    width: 80px; 
-    height: 80px;
-    max-width: 80px;
-    max-height: 80px;
+    position: absolute; border-radius: 50%; object-fit: cover;
+    width: 80px; height: 80px; max-width: 80px; max-height: 80px;
+    left: 50%; top: 50%; margin-left: -40px; margin-top: -40px;
 }
 
 #side-left { 
-    opacity: 0;
-    transform: translateX(-120px); 
+    opacity: 0; transform: translateX(-120px); 
     animation: mergeLeft 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
 
 #side-right { 
-    opacity: 0;
-    transform: translateX(120px); 
+    opacity: 0; transform: translateX(120px); 
     animation: mergeRight 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
 
 #main-pop {
-    width: 140px; 
-    height: 140px;
-    max-width: 140px;
-    max-height: 140px;
-    opacity: 0;
-    transform: scale(0);
-    border: 3px solid #fff;
-    z-index: 100;
+    width: 140px; height: 140px; max-width: 140px; max-height: 140px;
+    opacity: 0; margin-left: -70px; margin-top: -70px;
+    transform: scale(0); border: 3px solid #fff; z-index: 100;
     animation: popOut 0.6s 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Animations that stay centered */
 @keyframes mergeLeft {
-    0% { opacity: 0; transform: translateX(-120px) scale(0.8); }
-    50% { opacity: 1; transform: translateX(-30px) scale(1); }
+    0% { opacity: 0; transform: translateX(-120px); }
+    50% { opacity: 1; transform: translateX(-30px); }
     100% { opacity: 0; transform: translateX(0) scale(0.2); }
 }
 
 @keyframes mergeRight {
-    0% { opacity: 0; transform: translateX(120px) scale(0.8); }
-    50% { opacity: 1; transform: translateX(30px) scale(1); }
+    0% { opacity: 0; transform: translateX(120px); }
+    50% { opacity: 1; transform: translateX(30px); }
     100% { opacity: 0; transform: translateX(0) scale(0.2); }
 }
 
@@ -77,42 +56,60 @@
 
 body.loaded #loader-overlay { opacity: 0; pointer-events: none; }
 
-/* --- CORE LAYOUT --- */
+/* 2. CORE LAYOUT & BACKGROUND */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-:root { --bg-dark: #050505; --glass: rgba(255, 255, 255, 0.08); --glass-border: rgba(255, 255, 255, 0.15); }
-
 body { 
     margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
-    background: var(--bg-dark); color: white; 
+    background: #050505; color: white; 
     display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
 }
 
 .background-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('images/background.jpg') center/cover no-repeat; z-index: -1; }
 
 .container { 
-    background: var(--glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-    border: 1px solid var(--glass-border); border-radius: 40px;
+    background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 40px;
     padding: 50px 20px; margin: 40px 15px; width: 95%; max-width: 600px; text-align: center;
 }
 
-/* --- LOGO HEADER --- */
+/* 3. LOGO HEADER */
 .triple-logo-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 25px; }
-.circle-frame { border-radius: 50%; overflow: hidden; border: 2px solid var(--glass-border); background: #000; flex-shrink: 0; aspect-ratio: 1/1; }
+.circle-frame { border-radius: 50%; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.15); background: #000; flex-shrink: 0; aspect-ratio: 1/1; }
 .circle-frame img { width: 100%; height: 100%; object-fit: cover; }
 .frame-side { width: 85px; height: 85px; margin: 0 -15px; z-index: 1; opacity: 0.6; }
 .frame-center { width: 125px; height: 125px; z-index: 5; border: 2px solid #fff; }
 
-/* --- SOCIALS --- */
-.social-bubbles { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px auto 30px; }
+/* 4. HORIZONTAL SPORTS NAV */
+.category-nav { 
+    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; 
+    padding: 15px 5px; margin-bottom: 30px; scrollbar-width: none; 
+}
+.category-nav::-webkit-scrollbar { display: none; }
+.category-nav .bubble { flex: 0 0 auto; }
+
 .bubble { 
-    flex: 0 1 auto; padding: 10px 18px; border-radius: 50px; background: rgba(255,255,255,0.1);
-    color: white; text-decoration: none; font-size: 0.7rem; font-weight: 700;
-    border: 1px solid var(--glass-border); transition: 0.3s; white-space: nowrap;
+    padding: 12px 22px; border-radius: 50px; background: rgba(255,255,255,0.1);
+    color: white; text-decoration: none; font-size: 0.75rem; font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.15); transition: 0.3s; white-space: nowrap; cursor: pointer;
 }
 .bubble:hover { background: #fff; color: #000; }
 
-/* --- GRID --- */
+/* 5. PHOTO GRID & LIGHTBOX */
 .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; }
-.photo-item { border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); aspect-ratio: 1/1; background: #111; transition: 0.3s; }
-.photo-item:hover { border-color: #fff; }
-.photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-item { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); aspect-ratio: 1/1; background: #111; }
+.photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+
+.lightbox { 
+    display: none; position: fixed; z-index: 999999; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.96); backdrop-filter: blur(20px);
+    justify-content: center; align-items: center; flex-direction: column; 
+}
+.lightbox-content { max-width: 90%; max-height: 70vh; border-radius: 15px; }
+
+/* Hidden Download Button Fix */
+.action-btn { 
+    display: none; margin-top: 25px; padding: 16px 35px; 
+    background: #fff; color: #000; text-decoration: none; 
+    border-radius: 50px; font-weight: 900; 
+}
+.lightbox[style*="display: flex"] .action-btn { display: inline-block; }
