@@ -1,34 +1,64 @@
-/* --- Chase Studios Merge Loader (Master 7.1) --- */
+/* --- Chase Studios Merge Loader (v7.2 - Overflow Fix) --- */
 #loader-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #000; z-index: 10000;
-    display: flex; justify-content: center; align-items: center;
-    opacity: 1; transition: opacity 0.6s ease-in-out;
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100vw; height: 100vh; 
+    background: #000; 
+    z-index: 10000;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    opacity: 1; 
+    transition: opacity 0.6s ease-in-out;
+    overflow: hidden; /* Stops large logos from showing outside the center */
 }
 
 .loader-wrapper {
-    position: relative; width: 200px; height: 200px;
-    display: flex; justify-content: center; align-items: center;
+    position: relative;
+    width: 300px; 
+    height: 300px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 }
 
 .loader-img {
-    position: absolute; border-radius: 50%; overflow: hidden;
-    aspect-ratio: 1/1; object-fit: cover;
+    position: absolute; 
+    border-radius: 50%; 
+    overflow: hidden;
+    aspect-ratio: 1/1; 
+    object-fit: cover;
+    /* This ensures they stay in the middle of the wrapper */
+    left: 50%; 
+    top: 50%;
 }
 
 #side-left { 
-    width: 80px; opacity: 0; transform: translateX(-150px); 
+    width: 100px; 
+    opacity: 0; 
+    margin-left: -50px; /* Half of width to center */
+    margin-top: -50px;
+    transform: translateX(-150px); 
     animation: mergeLeft 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
 
 #side-right { 
-    width: 80px; opacity: 0; transform: translateX(150px); 
+    width: 100px; 
+    opacity: 0; 
+    margin-left: -50px;
+    margin-top: -50px;
+    transform: translateX(150px); 
     animation: mergeRight 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
 
 #main-pop {
-    width: 130px; opacity: 0; transform: scale(0);
-    border: 3px solid #fff; z-index: 10;
+    width: 150px; 
+    opacity: 0; 
+    margin-left: -75px;
+    margin-top: -75px;
+    transform: scale(0);
+    border: 4px solid #fff; 
+    z-index: 10;
     animation: popOut 0.6s 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
@@ -50,7 +80,6 @@
 }
 
 body.loaded #loader-overlay { opacity: 0; pointer-events: none; }
-
 /* --- CORE LAYOUT --- */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 :root { --bg-dark: #050505; --glass: rgba(255, 255, 255, 0.08); --glass-border: rgba(255, 255, 255, 0.15); }
