@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chase Studios | Home</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png"> <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="glitch-loader">
+        <div id="glitch-container">
+            <div id="logo-1" class="glitch-item"><img src="images/logo1.png"></div>
+            <div id="logo-2" class="glitch-item"><img src="images/logo2.png"></div>
+            <div id="logo-main" class="glitch-item"><img src="images/logo-main.png"></div>
+        </div>
+        <p style="color:white; font-size:0.7rem; font-weight:700; margin-top:20px; opacity:0.3; letter-spacing:2px;">LOADING...</p>
+    </div>
+
     <div class="background-overlay"></div>
     <div class="container">
         <header>
@@ -17,16 +25,16 @@
                 <div class="circle-frame frame-side"><img src="images/logo2.png"></div>
             </div>
             <h1>Chase Studios</h1>
-            <p style="opacity:0.7; font-size:0.8rem;">The Ultimate Production Crossover | Digital Creator</p>
+            <p style="opacity:0.7; font-size:0.85rem; margin-bottom: 25px;">The Ultimate Production Crossover | Digital Creator</p>
         </header>
 
-<nav class="social-bubbles">
-    <a href="https://tiktok.com/@notchas3.lol" class="bubble">TikTok Studio 1</a>
-    <a href="https://tiktok.com/@chasestudiotv" class="bubble">TikTok Studio 2</a>
-    <a href="https://instagram.com/chas3.lol" class="bubble">Instagram Studio 1</a>
-    <a href="https://instagram.com/chyston.studio" class="bubble">Instagram Studio 2</a>
-    <a href="https://youtube.com/@NOTCHAS3" class="bubble">YouTube NOTCHAS3</a>
-</nav>
+        <nav class="social-bubbles">
+            <a href="https://tiktok.com/@notchas3.lol" class="bubble">Chase Studio TikTok</a>
+            <a href="https://tiktok.com/@chasestudiotv" class="bubble">Chase Studio TV TikTok</a>
+            <a href="https://instagram.com/chas3.lol" class="bubble">Chase Studio Instagram</a>
+            <a href="https://instagram.com/chyston.studio.pics" class="bubble">Chyston Studio Instagram</a>
+            <a href="https://youtube.com/@NOTCHAS3" class="bubble">Chase Studio YouTube</a>
+        </nav>
 
         <div class="photo-grid">
             <a href="Shoots.html" class="photo-item"><img src="images/covers/shootscover.png"></a>
@@ -35,5 +43,14 @@
             <a href="paid.html" class="photo-item"><img src="images/covers/paidcover.png"></a>
         </div>
     </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('glitch-loader');
+            setTimeout(() => { loader.classList.add('start-anim'); }, 500);
+            setTimeout(() => { loader.classList.add('main-anim'); }, 1700);
+            setTimeout(() => { document.body.classList.add('loaded'); }, 2400);
+        });
+    </script>
 </body>
 </html>
