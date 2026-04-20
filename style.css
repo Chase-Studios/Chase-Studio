@@ -77,18 +77,44 @@ body {
 .frame-center { width: 125px; height: 125px; z-index: 5; border: 2px solid #fff; }
 
 /* 4. NAVIGATION (Socials & Categories) */
-.category-nav, .social-bubbles { 
-    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; 
-    padding: 15px 5px; margin-bottom: 25px; scrollbar-width: none; 
+/* --- Master Bubble Fix (Horizontal Scroll) --- */
+
+.social-bubbles, 
+.category-nav { 
+    display: flex;            /* Puts bubbles in a row */
+    flex-wrap: nowrap;       /* Prevents them from stacking */
+    overflow-x: auto;        /* Allows side-to-side swiping */
+    gap: 10px;               /* Space between buttons */
+    padding: 10px 5px;       /* Padding so they don't touch the edges */
+    margin-bottom: 25px; 
+    scrollbar-width: none;   /* Hides scrollbar on Firefox */
+    -webkit-overflow-scrolling: touch; /* Smooth swiping on iPhone */
 }
-.category-nav::-webkit-scrollbar, .social-bubbles::-webkit-scrollbar { display: none; }
+
+/* Hides scrollbar on Chrome, Safari, and Opera */
+.social-bubbles::-webkit-scrollbar, 
+.category-nav::-webkit-scrollbar { 
+    display: none; 
+}
 
 .bubble { 
-    flex: 0 0 auto; padding: 12px 22px; border-radius: 50px; background: rgba(255,255,255,0.1);
-    color: white; text-decoration: none; font-size: 0.75rem; font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.15); transition: 0.3s; white-space: nowrap; cursor: pointer;
+    flex: 0 0 auto;          /* Prevents buttons from squishing */
+    padding: 10px 20px; 
+    border-radius: 50px; 
+    background: rgba(255,255,255,0.1);
+    color: white; 
+    text-decoration: none; 
+    font-size: 0.75rem; 
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    white-space: nowrap;     /* Keeps text on one line */
+    transition: 0.3s;
 }
-.bubble:hover { background: #fff; color: #000; }
+
+.bubble:hover { 
+    background: #fff; 
+    color: #000; 
+}
 
 /* 5. PHOTO GRID & LIGHTBOX */
 .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; }
