@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chase Studios | Home</title>
-    <link rel="icon" type="image/png" href="images/favicon.png"> <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="glitch-loader">
-        <div id="glitch-container">
-            <div id="logo-1" class="glitch-item"><img src="images/logo1.png"></div>
-            <div id="logo-2" class="glitch-item"><img src="images/logo2.png"></div>
-            <div id="logo-main" class="glitch-item"><img src="images/logo-main.png"></div>
+    <div id="loader-overlay">
+        <div class="loader-wrapper">
+            <img src="images/logo1.png" id="side-left" class="loader-img">
+            <img src="images/logo2.png" id="side-right" class="loader-img">
+            <img src="images/logo-main.png" id="main-pop" class="loader-img">
         </div>
-        <p style="color:white; font-size:0.7rem; font-weight:700; margin-top:20px; opacity:0.3; letter-spacing:2px;">LOADING...</p>
     </div>
 
     <div class="background-overlay"></div>
@@ -45,12 +45,12 @@
     </div>
 
     <script>
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('glitch-loader');
-            setTimeout(() => { loader.classList.add('start-anim'); }, 500);
-            setTimeout(() => { loader.classList.add('main-anim'); }, 1700);
-            setTimeout(() => { document.body.classList.add('loaded'); }, 2400);
-        });
+        function finishLoading() {
+            setTimeout(() => { document.body.classList.add('loaded'); }, 2200);
+        }
+        window.addEventListener('load', finishLoading);
+        // Fail-safe for mobile
+        setTimeout(() => { if(!document.body.classList.contains('loaded')) finishLoading(); }, 4000);
     </script>
 </body>
 </html>
