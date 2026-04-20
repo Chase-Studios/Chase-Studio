@@ -1,12 +1,11 @@
-/* --- Chase Studios Master CSS v9.0 --- */
+/* --- Chase Studios Master CSS v10.0 --- */
 
-/* 1. FULL SCREEN MERGE LOADER */
+/* 1. MERGE LOADER (CENTERED & CLAMPED) */
 #loader-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: #000; z-index: 99999;
     display: flex; justify-content: center; align-items: center;
-    opacity: 1; transition: opacity 0.6s ease-in-out;
-    overflow: hidden;
+    transition: opacity 0.6s ease; overflow: hidden;
 }
 
 .loader-wrapper {
@@ -16,8 +15,7 @@
 
 .loader-img {
     position: absolute; border-radius: 50%; object-fit: cover;
-    width: 80px; height: 80px; max-width: 80px; max-height: 80px;
-    left: 50%; top: 50%; margin-left: -40px; margin-top: -40px;
+    width: 80px; height: 80px; left: 50%; top: 50%; margin-left: -40px; margin-top: -40px;
 }
 
 #side-left { 
@@ -31,8 +29,7 @@
 }
 
 #main-pop {
-    width: 140px; height: 140px; max-width: 140px; max-height: 140px;
-    opacity: 0; margin-left: -70px; margin-top: -70px;
+    width: 140px; height: 140px; opacity: 0; margin-left: -70px; margin-top: -70px;
     transform: scale(0); border: 3px solid #fff; z-index: 100;
     animation: popOut 0.6s 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
@@ -56,7 +53,7 @@
 
 body.loaded #loader-overlay { opacity: 0; pointer-events: none; }
 
-/* 2. CORE LAYOUT & BACKGROUND */
+/* 2. LAYOUT & GLASS CONTAINER */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body { 
     margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -72,23 +69,22 @@ body {
     padding: 50px 20px; margin: 40px 15px; width: 95%; max-width: 600px; text-align: center;
 }
 
-/* 3. LOGO HEADER */
+/* 3. LOGO TRIPLE WRAP */
 .triple-logo-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 25px; }
 .circle-frame { border-radius: 50%; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.15); background: #000; flex-shrink: 0; aspect-ratio: 1/1; }
 .circle-frame img { width: 100%; height: 100%; object-fit: cover; }
 .frame-side { width: 85px; height: 85px; margin: 0 -15px; z-index: 1; opacity: 0.6; }
 .frame-center { width: 125px; height: 125px; z-index: 5; border: 2px solid #fff; }
 
-/* 4. HORIZONTAL SPORTS NAV */
-.category-nav { 
+/* 4. NAVIGATION (Socials & Categories) */
+.category-nav, .social-bubbles { 
     display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; 
-    padding: 15px 5px; margin-bottom: 30px; scrollbar-width: none; 
+    padding: 15px 5px; margin-bottom: 25px; scrollbar-width: none; 
 }
-.category-nav::-webkit-scrollbar { display: none; }
-.category-nav .bubble { flex: 0 0 auto; }
+.category-nav::-webkit-scrollbar, .social-bubbles::-webkit-scrollbar { display: none; }
 
 .bubble { 
-    padding: 12px 22px; border-radius: 50px; background: rgba(255,255,255,0.1);
+    flex: 0 0 auto; padding: 12px 22px; border-radius: 50px; background: rgba(255,255,255,0.1);
     color: white; text-decoration: none; font-size: 0.75rem; font-weight: 700;
     border: 1px solid rgba(255, 255, 255, 0.15); transition: 0.3s; white-space: nowrap; cursor: pointer;
 }
@@ -105,11 +101,5 @@ body {
     justify-content: center; align-items: center; flex-direction: column; 
 }
 .lightbox-content { max-width: 90%; max-height: 70vh; border-radius: 15px; }
-
-/* Hidden Download Button Fix */
-.action-btn { 
-    display: none; margin-top: 25px; padding: 16px 35px; 
-    background: #fff; color: #000; text-decoration: none; 
-    border-radius: 50px; font-weight: 900; 
-}
+.action-btn { display: none; margin-top: 25px; padding: 16px 35px; background: #fff; color: #000; text-decoration: none; border-radius: 50px; font-weight: 900; }
 .lightbox[style*="display: flex"] .action-btn { display: inline-block; }
