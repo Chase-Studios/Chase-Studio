@@ -1,4 +1,4 @@
-/* --- Chase Studios Glitch Loader (Master 5.1) --- */
+/* --- Chase Studios Glitch Loader (Master 5.2 - Center Fix) --- */
 #glitch-loader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: #000; z-index: 10000;
@@ -7,40 +7,86 @@
 }
 
 #glitch-container {
-    position: relative; width: 300px; height: 300px;
+    position: relative; 
+    width: 100%; /* Changed to 100% to ensure true screen centering */
+    height: 300px;
     display: flex; justify-content: center; align-items: center;
 }
 
 .glitch-item {
     position: absolute; border-radius: 50%; overflow: hidden;
     display: flex; justify-content: center; align-items: center;
-    aspect-ratio: 1/1; transition: all 1.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+    aspect-ratio: 1/1; 
+    left: 50%; top: 50%; /* Force start at center */
+    transition: all 1.2s cubic-bezier(0.1, 0.9, 0.2, 1);
 }
 
 .glitch-item img { width: 100%; height: 100%; object-fit: cover; }
 
-#logo-1.glitch-item { width: 0; height: 0; opacity: 0; transform: translateX(-400px); z-index: 1; filter: saturate(0.2); }
-#logo-2.glitch-item { width: 0; height: 0; opacity: 0; transform: translateX(400px); z-index: 1; filter: saturate(0.2); }
-#logo-main.glitch-item { width: 0; height: 0; opacity: 0; transform: scale(0.1); z-index: 5; border: 4px solid #fff; }
+/* Initial Positions: Logos are hidden and pushed far out */
+#logo-1.glitch-item { 
+    width: 90px; height: 90px; opacity: 0; 
+    transform: translate(-50%, -50%) translateX(-300px); 
+    z-index: 1; 
+}
+#logo-2.glitch-item { 
+    width: 90px; height: 90px; opacity: 0; 
+    transform: translate(-50%, -50%) translateX(300px); 
+    z-index: 1; 
+}
+#logo-main.glitch-item { 
+    width: 0; height: 0; opacity: 0; 
+    transform: translate(-50%, -50%) scale(0.1); 
+    z-index: 5; border: 4px solid #fff; 
+}
 
-#glitch-loader.start-anim #logo-1 { width: 90px; height: 90px; opacity: 1; transform: translateX(-70px); animation: sideGlitch 0.2s 1s steps(2) infinite; }
-#glitch-loader.start-anim #logo-2 { width: 90px; height: 90px; opacity: 1; transform: translateX(70px); animation: sideGlitch 0.2s 1s steps(2) infinite; }
-#glitch-loader.main-anim #logo-main { width: 130px; height: 130px; opacity: 1; transform: scale(1); animation: mainGlitchSnap 0.3s steps(3) forwards; }
+/* Phase 1: Side logos fly to center and glitch */
+#glitch-loader.start-anim #logo-1 { 
+    opacity: 1; 
+    transform: translate(-50%, -50%) translateX(-60px); 
+    animation: centerGlitchLeft 0.2s 1s steps(2) infinite;
+}
+#glitch-loader.start-anim #logo-2 { 
+    opacity: 1; 
+    transform: translate(-50%, -50%) translateX(60px); 
+    animation: centerGlitchRight 0.2s 1s steps(2) infinite;
+}
 
-body.loaded #glitch-loader { opacity: 0; pointer-events: none; }
+/* Phase 2: Main logo pops out from the center */
+#glitch-loader.main-anim #logo-main { 
+    width: 140px; height: 140px; opacity: 1; 
+    transform: translate(-50%, -50%) scale(1); 
+    animation: mainGlitchSnap 0.3s steps(3) forwards;
+}
 
-@keyframes sideGlitch {
-    0% { transform: translateX(-70px); }
-    50% { transform: translateX(-67px) skewX(2deg); opacity: 0.5; }
-    100% { transform: translateX(-70px); }
+/* Logic for side logos to disappear when main pops */
+#glitch-loader.main-anim #logo-1, 
+#glitch-loader.main-anim #logo-2 {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.3s;
+}
+
+/* KEYFRAMES - Focused on center */
+@keyframes centerGlitchLeft {
+    0% { transform: translate(-50%, -50%) translateX(-60px); }
+    50% { transform: translate(-50%, -50%) translateX(-55px) skewX(5deg); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) translateX(-60px); }
+}
+
+@keyframes centerGlitchRight {
+    0% { transform: translate(-50%, -50%) translateX(60px); }
+    50% { transform: translate(-50%, -50%) translateX(55px) skewX(-5deg); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) translateX(60px); }
 }
 
 @keyframes mainGlitchSnap {
-    0% { transform: scale(0.1); filter: contrast(100); }
-    30% { transform: scale(1.1) skewX(-15deg); opacity: 0; }
-    50% { transform: scale(0.9) skewX(15deg); filter: invert(1); }
-    100% { transform: scale(1); opacity: 1; }
+    0% { transform: translate(-50%, -50%) scale(0.1); filter: contrast(2); }
+    50% { transform: translate(-50%, -50%) scale(1.1) skewX(10deg); filter: invert(1); }
+    100% { transform: translate(-50%, -50%) scale(1); filter: contrast(1); }
 }
+
+/* The rest of your existing body.loaded and background-overlay CSS stays below... */
 
 /* --- CORE LAYOUT --- */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
