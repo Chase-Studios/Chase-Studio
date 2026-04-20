@@ -129,3 +129,10 @@ body {
 .lightbox-content { max-width: 90%; max-height: 70vh; border-radius: 15px; }
 .action-btn { display: none; margin-top: 25px; padding: 16px 35px; background: #fff; color: #000; text-decoration: none; border-radius: 50px; font-weight: 900; }
 .lightbox[style*="display: flex"] .action-btn { display: inline-block; }
+
+/* Pushes the Return Home button down for better spacing */
+.return-btn {
+    display: inline-block;
+    margin-top: 40px !important; /* Forces 40px of space above the button */
+    margin-bottom: 20px;
+}
