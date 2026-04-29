@@ -34,6 +34,7 @@
     animation: popOut 0.6s 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
+
 @keyframes mergeLeft {
     0% { opacity: 0; transform: translateX(-120px); }
     50% { opacity: 1; transform: translateX(-30px); }
@@ -135,4 +136,35 @@ body {
     display: inline-block;
     margin-top: 40px !important; /* Forces 40px of space above the button */
     margin-bottom: 20px;
+}
+/* --- Quote Section Styles --- */
+.quote-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid #fff;
+    border-radius: 15px;
+    font-style: italic;
+    animation: fadeInQuote 2s ease-in;
+}
+
+.quote-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.quote-author {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+@keyframes fadeInQuote {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
