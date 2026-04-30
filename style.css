@@ -1,4 +1,4 @@
-/* --- Chase Studios Master CSS v10.0 --- */
+/* --- Chase Studios Master CSS v14.0 --- */
 
 /* 1. MERGE LOADER (CENTERED & CLAMPED) */
 #loader-overlay {
@@ -54,20 +54,38 @@
 
 body.loaded #loader-overlay { opacity: 0; pointer-events: none; }
 
-/* 2. LAYOUT & GLASS CONTAINER */
+/* 2. LAYOUT & GLASS CONTAINER - FIXED ALIGNMENT */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
 body { 
     margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
     background: #050505; color: white; 
-    display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
+    display: flex; 
+    flex-direction: column; /* Forces everything to stack vertically */
+    align-items: center;    /* Centers the container horizontally */
+    justify-content: flex-start; 
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-.background-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('images/background.jpg') center/cover no-repeat; z-index: -1; }
+.background-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: url('images/background.jpg') center/cover no-repeat; 
+    z-index: -1; 
+}
 
 .container { 
-    background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+    background: rgba(255, 255, 255, 0.08); 
+    backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 40px;
-    padding: 50px 20px; margin: 40px 15px; width: 95%; max-width: 600px; text-align: center;
+    padding: 50px 20px; 
+    margin: 40px auto; /* Centers the box */
+    width: 90%; 
+    max-width: 500px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* 3. LOGO TRIPLE WRAP */
@@ -78,28 +96,22 @@ body {
 .frame-center { width: 125px; height: 125px; z-index: 5; border: 2px solid #fff; }
 
 /* 4. NAVIGATION (Socials & Categories) */
-/* --- Master Bubble Fix (Horizontal Scroll) --- */
-
-.social-bubbles, 
-.category-nav { 
-    display: flex;            /* Puts bubbles in a row */
-    flex-wrap: nowrap;       /* Prevents them from stacking */
-    overflow-x: auto;        /* Allows side-to-side swiping */
-    gap: 10px;               /* Space between buttons */
-    padding: 10px 5px;       /* Padding so they don't touch the edges */
+.social-bubbles, .category-nav { 
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 10px; 
+    padding: 10px 5px; 
     margin-bottom: 25px; 
-    scrollbar-width: none;   /* Hides scrollbar on Firefox */
-    -webkit-overflow-scrolling: touch; /* Smooth swiping on iPhone */
+    width: 100%; /* Ensures it spans the container width */
+    scrollbar-width: none; 
+    -webkit-overflow-scrolling: touch; 
 }
 
-/* Hides scrollbar on Chrome, Safari, and Opera */
-.social-bubbles::-webkit-scrollbar, 
-.category-nav::-webkit-scrollbar { 
-    display: none; 
-}
+.social-bubbles::-webkit-scrollbar, .category-nav::-webkit-scrollbar { display: none; }
 
 .bubble { 
-    flex: 0 0 auto;          /* Prevents buttons from squishing */
+    flex: 0 0 auto; 
     padding: 10px 20px; 
     border-radius: 50px; 
     background: rgba(255,255,255,0.1);
@@ -108,39 +120,54 @@ body {
     font-size: 0.75rem; 
     font-weight: 700;
     border: 1px solid rgba(255, 255, 255, 0.15); 
-    white-space: nowrap;     /* Keeps text on one line */
+    white-space: nowrap; 
     transition: 0.3s;
 }
 
-.bubble:hover { 
-    background: #fff; 
-    color: #000; 
-}
+.bubble:hover { background: #fff; color: #000; }
 
 /* 5. PHOTO GRID & LIGHTBOX */
-.photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; }
+.photo-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; 
+    width: 100%; 
+}
 .photo-item { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); aspect-ratio: 1/1; background: #111; }
 .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 
+/* LIGHTBOX & SLIDESHOW NAVIGATION */
 .lightbox { 
-    display: none; position: fixed; z-index: 999999; top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.96); backdrop-filter: blur(20px);
+    display: none; position: fixed; z-index: 999999; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.98); backdrop-filter: blur(15px);
     justify-content: center; align-items: center; flex-direction: column; 
 }
-.lightbox-content { max-width: 90%; max-height: 70vh; border-radius: 15px; }
-.action-btn { display: none; margin-top: 25px; padding: 16px 35px; background: #fff; color: #000; text-decoration: none; border-radius: 50px; font-weight: 900; }
+
+.lightbox-content { 
+    max-width: 90%; max-height: 75vh; 
+    border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.close-btn { position: absolute; top: 30px; right: 30px; font-size: 35px; color: white; cursor: pointer; z-index: 1000000; }
+
+.nav-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    font-size: 50px; color: white; cursor: pointer;
+    padding: 20px; user-select: none; transition: 0.3s;
+    background: rgba(0,0,0,0.2); border-radius: 50%;
+}
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.action-btn { display: none; margin-top: 25px; padding: 15px 35px; background: #fff; color: #000; text-decoration: none; border-radius: 50px; font-weight: 800; }
 .lightbox[style*="display: flex"] .action-btn { display: inline-block; }
 
-/* Pushes the Return Home button down for better spacing */
-.return-btn {
-    display: inline-block;
-    margin-top: 40px !important; /* Forces 40px of space above the button */
-    margin-bottom: 20px;
-}
-/* --- Quote Section Styles --- */
+/* 6. QUOTES & FOOTER */
 .quote-container {
     margin: 30px 0;
     padding: 20px;
+    width: 100%; /* Ensures alignment inside container */
     background: rgba(255, 255, 255, 0.05);
     border-left: 3px solid #fff;
     border-radius: 15px;
@@ -148,30 +175,17 @@ body {
     animation: fadeInQuote 2s ease-in;
 }
 
-.quote-text {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 10px;
-    display: block;
-}
-
-.quote-author {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #fff;
-}
+.quote-text { font-size: 1rem; line-height: 1.5; color: rgba(255, 255, 255, 0.9); margin-bottom: 10px; display: block; }
+.quote-author { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
 
 @keyframes fadeInQuote {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-/* --- Master Footer Style --- */
+
 footer {
-    margin-top: 60px; 
-    padding: 30px 0;
+    margin-top: 40px; 
+    padding: 20px 0;
     width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.1); 
     text-align: center;
@@ -183,4 +197,10 @@ footer {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: rgba(255, 255, 255, 0.4); 
+}
+
+.return-btn {
+    display: inline-block;
+    margin-top: 40px !important;
+    margin-bottom: 20px;
 }
