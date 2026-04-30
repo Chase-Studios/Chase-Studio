@@ -25,6 +25,7 @@
             <div class="bubble" onclick="loadSport('basketball')">Basketball</div>
             <div class="bubble" onclick="loadSport('volleyball')">Volleyball</div>
             <div class="bubble" onclick="loadSport('soccer')">Soccer</div>
+            <div class="bubble" onclick="loadSport('baseball')">Baseball</div>
             <div class="bubble" onclick="loadSport('cross-country')">XC</div>
             <div class="bubble" onclick="loadSport('bowling')">Bowling</div>
             <div class="bubble" onclick="loadSport('track')">Track</div>
@@ -34,11 +35,13 @@
         <div class="photo-grid" id="gallery"></div>
         
         <div style="margin-top: 30px;">
-            <a href="index.html" class="bubble">Return Home</a>
+            <a href="index.html" class="bubble return-btn">Return Home</a>
         </div>
-    </div>
 
-    <div id="lightbox" class="lightbox" onclick="if(event.target == this) this.style.display='none'">
+        <footer>
+            <p class="copyright-text">© 2026 CHASE STUDIOS | ALL RIGHTS RESERVED</p>
+        </footer>
+        </div> <div id="lightbox" class="lightbox" onclick="if(event.target == this) this.style.display='none'">
         <img class="lightbox-content" id="lb-img">
         <a id="dl-btn" class="action-btn" href="#" download>Download Image</a>
     </div>
@@ -46,7 +49,7 @@
     <script>
         function loadSport(sport) {
             const gallery = document.getElementById('gallery');
-            gallery.innerHTML = ""; // Clear current images
+            gallery.innerHTML = ""; 
             
             for (let i = 1; i <= 100; i++) {
                 const path = `images/khs/${sport}/${i}.jpg`;
@@ -57,18 +60,16 @@
                 img.src = path;
                 img.onclick = () => {
                     document.getElementById('lb-img').src = path;
-                    document.getElementById('dl-btn').href = path; // Fixes the download link
+                    document.getElementById('dl-btn').href = path; 
                     document.getElementById('lightbox').style.display = 'flex';
                 };
                 
-                // If image doesn't exist (e.g., only 5 photos in folder), hide the box
                 img.onerror = function() { this.parentElement.remove(); };
                 
                 item.appendChild(img);
                 gallery.appendChild(item);
             }
         }
-        // Load football by default when page opens
         window.onload = () => loadSport('football');
     </script>
 </body>
